@@ -19,7 +19,7 @@ using namespace std;
 
 int main() {
     
-    setConsolSize();
+    setConsoleSize();
 
     GameMap map1{};
     Player p1("PlayerOne", map1);

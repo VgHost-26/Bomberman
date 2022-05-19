@@ -13,7 +13,7 @@ void setCursorPosition(int x, int y) {    //ustawinei pozycji kursora w konsoli
 	COORD coord = { (SHORT)x, (SHORT)y };
 	SetConsoleCursorPosition(hOut, coord);
 }
-void setColors() {      //ustawienie domyslnej palety kolorów dla ca³ej gry    
+void setColors() {      //ustawienie domyslnej palety kolorï¿½w dla caï¿½ej gry    
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_SCREEN_BUFFER_INFOEX info;
 	info.cbSize = sizeof(CONSOLE_SCREEN_BUFFER_INFOEX);
@@ -42,7 +42,7 @@ void hideCursor() {		//ukrycie kursora
 	info.bVisible = FALSE;
 	SetConsoleCursorInfo(consoleHandle, &info);
 }
-void showCursor() {		//poka¿ kursor
+void showCursor() {		//pokaï¿½ kursor
 	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO info;
 	info.dwSize = 100;
@@ -50,20 +50,20 @@ void showCursor() {		//poka¿ kursor
 	SetConsoleCursorInfo(consoleHandle, &info);
 }
 
-void setConsolSize() {      //ustawienie konsoli na pe³ny ekran oraz dopasowanie czcionki do roŸdzielczoœci monitora
+void setConsoleSize() {      //ustawienie konsoli na peï¿½ny ekran oraz dopasowanie czcionki do roï¿½dzielczoï¿½ci monitora
 
 	int W = GetSystemMetrics(SM_CXSCREEN); //pobranie szerokosci ekranu
 	int H = GetSystemMetrics(SM_CYSCREEN); //pobranie wysokosci ekranu
 	int res{};
 
-	if (W / H > 16 / 9) {     //oprymalizacja dla szerszych ekranów ni¿ 16:9
+	if (W / H > 16 / 9) {     //oprymalizacja dla szerszych ekranï¿½w niï¿½ 16:9
 		res = W - (((W * 9) - (H * 16)) / 9);
 	}
 	else {
 		res = W;
 	}
 
-	SetConsoleDisplayMode(GetStdHandle(STD_OUTPUT_HANDLE), CONSOLE_FULLSCREEN_MODE, 0); //pelny ekran ... i cztery nastêpne te¿
+	SetConsoleDisplayMode(GetStdHandle(STD_OUTPUT_HANDLE), CONSOLE_FULLSCREEN_MODE, 0); //pelny ekran ... i cztery nastï¿½pne teï¿½
 	// system("mode 650");
 	// system("mode con COLS=700");
 	// ShowWindow(GetConsoleWindow(), SW_MAXIMIZE);

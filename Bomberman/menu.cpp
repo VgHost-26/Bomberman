@@ -15,7 +15,11 @@ using namespace std;
 
 int main(){
 
+    setConsoleSize();
 
+
+    cout<<"Hello Allachu'akbar BOMBERMAN!!!"<<endl;
+    system("pause");
     system("start game.exe");
 
     return 0;
