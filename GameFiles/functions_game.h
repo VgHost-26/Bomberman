@@ -3,7 +3,6 @@
 
 //void poruszanie(int, int, int, int, bool(*fa), bool(*fb), bool(*fc), bool(*fd), int(*f1));
 
-
 bool poruszanie(int w, int a, int s, int d, bool(*fws)(int), bool(*fad)(int), int(*f1)()){
 
     int key{};

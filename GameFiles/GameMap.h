@@ -5,7 +5,6 @@ class GameMap {
 private:
 
 	
-	
 public:
 	int map[sizeX][sizeY];
 	
