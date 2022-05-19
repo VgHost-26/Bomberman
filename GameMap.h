@@ -8,17 +8,22 @@ private:
 	
 public:
 	int map[sizeX][sizeY];
+	
 
-	void cls(int x, int y){		//wyczyszcza jeden wybrany pixel na mapie 
+
+	void cls(int, int);
+	void loadMap(int);
+	void drawMap();
+
+	/*----------------------------------------------*/
+};
+	void GameMap::cls(int x, int y){		//wyczyszcza jeden wybrany pixel na mapie 
 		setCursorPosition(x,y);
 		cout<<" "<<" ";
 	}
 
-	
 
-
-	void loadMap(int name) {	//wczytuje wybraną mape
-		int x;
+	void GameMap::loadMap(int name) {	//wczytuje wybraną mape
 		
 		string mapName = "map_";
 		mapName += (name + 48);
@@ -29,21 +34,21 @@ public:
 
 		for (int i = 0; i < sizeY; i++) {
 			for (int j = 0; j < sizeX; j++) {
-				plik >> map[i][j];
+				plik >> map[j][i];
 			}
 		}
 
 		plik.close();
 	}
-	void drawMap() {	//rysuje wcztaną wcześniej mape 
+	void GameMap::drawMap() {	//rysuje wcztaną wcześniej mape 
 
 		
 		for (int i = 0; i < sizeY; i++) {
 			for (int j = 0; j < sizeX; j++) {
 				
-				setCursorPosition((i * 2) + marginLeft*2, j + marginTop );
+				setCursorPosition(j*2, i);
 
-				switch (map[j][i]) {	//LOL ni emam pojęcia dlaczego tutaj musi byc i, j na odwrót
+				switch (map[j][i]) {	
 					/*
 					case 0:	// puste pole
 						cout << " " << " ";
@@ -77,17 +82,17 @@ public:
 		}
 
 	}
-	void drawBorder() {
-		for (int i = 0; i < sizeY; i++) {
-			for (int j = 0; j < sizeX; j++) {
+	// void drawBorder() {
+	// 	for (int i = 0; i < sizeY; i++) {
+	// 		for (int j = 0; j < sizeX; j++) {
 
-				if ((i == 0 || i == sizeY - 1) || (j == 0 || j == sizeX - 1)) {
-					setCursorPosition(j * 2, i);
-					cout << char(219) << char(219);	// ██
-				}
-			}
-		}
-	}
+	// 			if ((i == 0 || i == sizeY - 1) || (j == 0 || j == sizeX - 1)) {
+	// 				setCursorPosition(j * 2, i);
+	// 				cout << char(219) << char(219);	// ██
+	// 			}
+	// 		}
+	// 	}
+	// }
 
-};
+
 

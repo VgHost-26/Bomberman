@@ -20,19 +20,24 @@ using namespace std;
 int main() {
     
     setConsolSize();
+    hideCursor();
 
     GameMap map1{};
-    Player p1("PlayerOne", map1);
+    Player p1("PlayerOne", &map1);
     cout << p1.name <<endl;
 
-    map1.drawBorder();
+   // map1.drawBorder();
     map1.loadMap(0);
     map1.drawMap();
     
     p1.show();
 
+
+      
     while(1){
-        p1.ruchY(1);
+        
+       // poruszanie(119, 97, 115, 100, p1.*ruchY, p1.*ruchX, getKey);
+        //p1.ruchX(1);
         Sleep(100);
     }
 
@@ -40,5 +45,15 @@ int main() {
     system("pause");
 
     return 0;
+
 }
+
+/*
+
+W = 119
+A = 97 
+S = 115
+D = 100
+
+*/
 
