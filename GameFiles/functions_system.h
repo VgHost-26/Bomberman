@@ -50,7 +50,7 @@ void showCursor() {		//pokaø kursor
 	SetConsoleCursorInfo(consoleHandle, &info);
 }
 
-void setConsolSize() {      //ustawienie konsoli na pe≥ny ekran oraz dopasowanie czcionki do roüdzielczoúci monitora
+void setConsoleSize() {      //ustawienie konsoli na pe≥ny ekran oraz dopasowanie czcionki do roüdzielczoúci monitora
 
 	int W = GetSystemMetrics(SM_CXSCREEN); //pobranie szerokosci ekranu
 	int H = GetSystemMetrics(SM_CYSCREEN); //pobranie wysokosci ekranu

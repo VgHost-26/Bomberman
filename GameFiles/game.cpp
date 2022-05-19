@@ -19,7 +19,7 @@ using namespace std;
 
 int main() {
     
-    setConsolSize();
+    setConsoleSize();
     hideCursor();
 
     GameMap map1{};
@@ -36,7 +36,7 @@ int main() {
       
     while(1){
         
-       // poruszanie(119, 97, 115, 100, p1.*ruchY, p1.*ruchX, getKey);
+       // poruszanie(119, 97, 115, 100, p1, getKey);
         //p1.ruchX(1);
         Sleep(100);
     }
