@@ -1,12 +1,13 @@
 ﻿/* Plik z czystą grą */
 
-using namespace std;
 //biblioteki systemowe
 #include <iostream>
 #include <fstream>
 #include <windows.h>
 #include <conio.h>
 #include <ctime>
+
+using namespace std;
 
 //biblioteki swoje
 #include "functions_system.h"

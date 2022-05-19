@@ -1,4 +1,5 @@
 #pragma once
+
 class Player{
 	friend class GameMap;
 //private:

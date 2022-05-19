@@ -5,8 +5,6 @@
 #pragma comment(lib, "winmm.lib")
 #pragma warning(disable:4996)
 
-
-
 void setCursorPosition(int x, int y) {    //ustawinei pozycji kursora w konsoli
 	HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	cout.flush();
