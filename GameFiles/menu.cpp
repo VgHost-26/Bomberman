@@ -1,12 +1,13 @@
 /* plik z menu gry */
 
-using namespace std;
 //biblioteki systemowe
 #include <iostream>
 #include <fstream>
 #include <windows.h>
 #include <conio.h>
 #include <ctime>
+
+using namespace std;
 
 //biblioteki swoje
 #include "functions_system.h"
@@ -15,6 +16,7 @@ using namespace std;
 
 int main(){
 
+    cout<<"Boomboom"<<endl;
     system("pause");
     system("start game.exe");
 

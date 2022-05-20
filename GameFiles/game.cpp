@@ -7,8 +7,8 @@
 #include <conio.h>
 #include <ctime>
 
-using namespace std;
 
+using namespace std;
 //biblioteki swoje
 #include "functions_system.h"
 #include "functions_game.h"
@@ -16,7 +16,9 @@ using namespace std;
 
 //klasy
 #include "GameMap.h"
+#include "Being.h"
 #include "Player.h"
+#include "Enemy.h"
 
 int main() {
     
@@ -25,7 +27,6 @@ int main() {
 
     GameMap map1{};
     Player p1("PlayerOne", &map1);
-    cout << p1.name <<endl;
 
    // map1.drawBorder();
     map1.loadMap(0);
@@ -37,9 +38,9 @@ int main() {
       
     while(1){
         
-       // poruszanie(119, 97, 115, 100, p1, getKey);
-        //p1.ruchX(1);
+        p1.moveDir(119, 97, 115, 100, getKey);
         Sleep(100);
+        
     }
 
     setCursorPosition(100,50);
