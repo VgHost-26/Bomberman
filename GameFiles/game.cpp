@@ -28,7 +28,6 @@ int main() {
     GameMap map1{};
     Player p1("PlayerOne", &map1);
 
-   // map1.drawBorder();
     map1.loadMap(1);
     map1.drawMap();
     
@@ -38,7 +37,8 @@ int main() {
       
     while(1){
         
-        p1.moveDir(119, 97, 115, 100, getKey);
+        p1.moveDir(_W, _A, _S, _D, _SPACE_BAR, getKey);
+        
         Sleep(100);
         
     }
@@ -56,8 +56,8 @@ W = 119
 A = 97 
 S = 115
 D = 100
-SPACE = 
-ENTER = 
+SPACE = 32
+ENTER = 13
     
 */
 

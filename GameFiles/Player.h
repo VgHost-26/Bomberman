@@ -16,33 +16,23 @@ public:
 		Map = map1;
 	}
 
-	//setery
-	void setX(int x) {
-		X = x;
-	}
-	void setY(int y) {
-		Y = y;
-	}
-	
+	//SECTION getery:
 
-	//getery
-	int getX() {
-		return X;
-	}
-	int getY() {
-		return Y;
-	}
 	string getName(){
 		return name;
 	}
 
-	//metody
+	//!SECTION
+
+	//SECTION metody
 
 	void show();
 	bool moveX(int);
 	bool moveY(int);
-	bool moveDir(int, int, int, int, int(f1)());
-
+	bool moveDir(int, int, int, int, int, int(f1)());
+	bool plantBomb(int);
+	
+	//!SECTION
 
 
 };
@@ -60,7 +50,7 @@ public:
 		if(Map->map[X + dir][Y] != 0 || (X + dir >= (sizeX - 1) || X + dir <= 0)){
 			return false;
 		}else{
-			Map->cls(X * 2,Y);
+			if(Map->map[X][Y]==0) Map->cls(X * 2,Y);
 			X += dir;
 			show();
 			return true;
@@ -74,14 +64,14 @@ public:
 		if(Map->map[X][Y + dir] != 0 || (Y + dir >= (sizeY - 1) || Y + dir <= 0)){
 			return false;
 		}else{
-			Map->cls(X * 2,Y);
+			if(Map->map[X][Y]==0) Map->cls(X * 2,Y);
 			Y += dir;
 			show();
 			return true;
 		}
 		return false;
 	}
-	bool Player::moveDir(int w, int a, int s, int d, int(f1)()){		// funkcja do poruszania si© //skˆadowe: klawisz w g¢re, lewo, d¢ˆ, prawo, funkcja do pobierania klawiszy
+	bool Player::moveDir(int w, int a, int s, int d, int bomb, int(f1)()){		// funkcja do poruszania si© //skˆadowe: klawisz w g¢re, lewo, d¢ˆ, prawo, funkcja do pobierania klawiszy
 		
 		int key{};
 		key = f1();
@@ -98,9 +88,23 @@ public:
 		}else if(key == d){ //prawo
 			return moveX(1);
 
+		}else if(key == bomb){
+			return plantBomb(10);
 		}
 		
     	return 0;
+	}
+
+	bool Player::plantBomb(int type){	//kˆadzie bombe w aktualnym miejscu gdzie si© znajduje
+		
+		if(Map->map[X][Y] == 0) Map->map[X][Y] = type;
+
+		setCursorPosition(X * 4,Y * 2);
+		cout<<"/  "<<char(92);
+		setCursorPosition(X * 4,Y * 2 + 1);
+		cout<<char(92)<<"__/";
+		
+		return false;
 	}
 
 	
