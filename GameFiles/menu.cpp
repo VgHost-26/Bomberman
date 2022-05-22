@@ -29,13 +29,43 @@ int main(){
     int winWidth = csbi.dwMaximumWindowSize.X;
     int winHeight = csbi.dwMaximumWindowSize.Y;
 
+    string menuList[3]={
+        "    Graj",
+        "  Jak grac",
+        "   Wyjdz!"
+    };
+
     int defCol = 7; //Domyślny kolor tekstu;
+    int selected{};
+    int key_num{};
 
-    printLogo(defCol, middleCalc(winWidth, 119));
+    printLogo(defCol, middleCalc(winWidth, 119)); // Wyswietlanie tytulu gry w menu glownym
+    printBomob();
+    helpButtons(winWidth-30, winHeight-1);
 
-    cout.width(middleCalc(winWidth, 7)); cout<<"Boomboom"<<endl;
-    system("pause");
-    system("start game.exe");
+    select(menuList, 3, selected, defCol, 9, middleCalc(winWidth, 5));
+
+    while (1) {
+
+        key_num=getKey();
+
+        if(key_num==72) {   //Strzalka w gore
+                        
+            if(selected>0) {
+
+                selected--;
+                select(menuList, 3, selected, defCol, 9, middleCalc(winWidth, 5));
+            }
+
+        } else if(key_num==80) {  //Strzalka w dol
+                  
+            if(selected<2) {
+
+                selected++;
+                select(menuList, 3, selected, defCol, 9, middleCalc(winWidth, 5));
+            }
+        }
+    }
 
     return 0;
 }
