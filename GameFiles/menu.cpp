@@ -23,19 +23,48 @@ int main(){
     setConsoleSize();
     hideCursor();
 
-    //pobieranie wielko˜ci konsoli (centrowanie)
+    //pobieranie wielkoï¿½ci konsoli (centrowanie)
     CONSOLE_SCREEN_BUFFER_INFO csbi;    
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
     int winWidth = csbi.dwMaximumWindowSize.X;
     int winHeight = csbi.dwMaximumWindowSize.Y;
 
-    //int defCol = 7; //Domy˜lny kolor tekstu;  //Przeniosˆem to do Globals.h
+    string menuList[3]={
+        "    Graj",
+        "  Jak grac",
+        "   Wyjdz!"
+    };
 
-    printLogo(defCol, middleCalc(winWidth, 119));
+    int selected{};
+    int key_num{};
 
-    cout.width(middleCalc(winWidth, 7)); cout<<"Boomboom"<<endl;
-    system("pause");
-    system("start game.exe");
+    printLogo(defCol, middleCalc(winWidth, 119)); // Wyswietlanie tytulu gry w menu glownym
+    printBomob();
+    helpButtons(winWidth-30, winHeight-1);
+
+    select(menuList, 3, selected, defCol, 9, middleCalc(winWidth, 5));
+
+    while (1) {
+
+        key_num=getKey();
+
+        if(key_num==72) {   //Strzalka w gore
+                        
+            if(selected>0) {
+
+                selected--;
+                select(menuList, 3, selected, defCol, 9, middleCalc(winWidth, 5));
+            }
+
+        } else if(key_num==80) {  //Strzalka w dol
+                  
+            if(selected<2) {
+
+                selected++;
+                select(menuList, 3, selected, defCol, 9, middleCalc(winWidth, 5));
+            }
+        }
+    }
 
     return 0;
 }
