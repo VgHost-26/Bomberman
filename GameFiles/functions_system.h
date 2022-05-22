@@ -17,7 +17,8 @@ void setColors() {      //ustawienie domyslnej palety kolorów dla ca³ej gry
 	info.cbSize = sizeof(CONSOLE_SCREEN_BUFFER_INFOEX);
 	GetConsoleScreenBufferInfoEx(hConsole, &info);
 
-	info.ColorTable[1] =  RGB(0, 0, 0);   //
+	//ANCHOR[id=color-list] color_list
+	info.ColorTable[1] =  RGB(204, 204, 204);   //default grey
 	info.ColorTable[2] =  RGB(0, 0, 0);   //
 	info.ColorTable[3] =  RGB(0, 0, 0);   //
 	info.ColorTable[4] =  RGB(0, 0, 0);   //

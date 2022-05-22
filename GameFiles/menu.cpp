@@ -23,13 +23,13 @@ int main(){
     setConsoleSize();
     hideCursor();
 
-    //pobieranie wielko≈õci konsoli (centrowanie)
+    //pobieranie wielkoòci konsoli (centrowanie)
     CONSOLE_SCREEN_BUFFER_INFO csbi;    
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
     int winWidth = csbi.dwMaximumWindowSize.X;
     int winHeight = csbi.dwMaximumWindowSize.Y;
 
-    int defCol = 7; //Domy≈õlny kolor tekstu;
+    //int defCol = 7; //Domyòlny kolor tekstu;  //Przeniosàem to do Globals.h
 
     printLogo(defCol, middleCalc(winWidth, 119));
 

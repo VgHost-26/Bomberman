@@ -12,12 +12,16 @@ public:
 
 	void cls(int, int);
 	void loadMap(int);
+	void drawBrick(int, int);
 	void drawMap();
-
 	/*----------------------------------------------*/
 };
 	void GameMap::cls(int x, int y){		//wyczyszcza jeden wybrany pixel na mapie 
-		setCursorPosition(x,y);
+		setCursorPosition(x*2,y*2);
+		cout<<" "<<" ";
+		cout<<" "<<" ";
+		setCursorPosition(x*2,y*2 + 1);
+		cout<<" "<<" ";
 		cout<<" "<<" ";
 	}
 
@@ -39,15 +43,9 @@ public:
 
 		plik.close();
 	}
-	void GameMap::drawMap() {	//rysuje wcztaną wcześniej mape 
+	void GameMap::drawBrick(int i, int j){
 
-		
-		for (int i = 0; i < sizeY; i++) {
-			for (int j = 0; j < sizeX; j++) {
-				
-				setCursorPosition(j*2, i);
-
-				switch (map[j][i]) {	
+		switch (map[j][i]) {	
 					/*
 					case 0:	// puste pole
 						cout << " " << " ";
@@ -72,8 +70,26 @@ public:
 						cout << "EE";
 						break;
 
-
 				}
+
+	}
+	void GameMap::drawMap() {	//rysuje wcztaną wcześniej mape 
+
+		
+		for (int i = 0; i < sizeY; i++) {
+			for (int j = 0; j < sizeX; j++) {
+				
+				
+				setCursorPosition(j*4, i*2);
+				drawBrick(i,j);
+				drawBrick(i,j);
+				
+				setCursorPosition(j*4, i*2 + 1);
+				drawBrick(i,j);
+				drawBrick(i,j);
+				
+
+				
 				
 
 
@@ -81,17 +97,6 @@ public:
 		}
 
 	}
-	// void drawBorder() {
-	// 	for (int i = 0; i < sizeY; i++) {
-	// 		for (int j = 0; j < sizeX; j++) {
-
-	// 			if ((i == 0 || i == sizeY - 1) || (j == 0 || j == sizeX - 1)) {
-	// 				setCursorPosition(j * 2, i);
-	// 				cout << char(219) << char(219);	// ██
-	// 			}
-	// 		}
-	// 	}
-	// }
 
 
 
