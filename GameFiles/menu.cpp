@@ -23,7 +23,7 @@ int main(){
     setConsoleSize();
     hideCursor();
 
-    //pobieranie wielkości konsoli (centrowanie)
+    //pobieranie wielko�ci konsoli (centrowanie)
     CONSOLE_SCREEN_BUFFER_INFO csbi;    
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
     int winWidth = csbi.dwMaximumWindowSize.X;

@@ -10,8 +10,8 @@ public:
 
 	//konstruktor
 	Player(string name, GameMap *map1){
-		X=2;
-		Y=2;
+		X=1;
+		Y=1;
 		this->name=name;
 		Map = map1;
 	}
@@ -47,7 +47,11 @@ public:
 
 };
 	void Player::show(){	//wy˜wietla gracza na mapie na jego aktualnej pozycji
-		setCursorPosition(X * 2,Y);
+		setCursorPosition(X * 4,Y*2);
+		cout<<"BM";
+		cout<<"BM";
+		setCursorPosition(X * 4,Y*2 + 1);
+		cout<<"BM";
 		cout<<"BM";
 	}
 

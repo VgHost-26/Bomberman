@@ -29,7 +29,7 @@ int main() {
     Player p1("PlayerOne", &map1);
 
    // map1.drawBorder();
-    map1.loadMap(0);
+    map1.loadMap(1);
     map1.drawMap();
     
     p1.show();
@@ -50,12 +50,14 @@ int main() {
 
 }
 
-/*
+/*  ANCHOR key number list
 
 W = 119
 A = 97 
 S = 115
 D = 100
-
+SPACE = 
+ENTER = 
+    
 */
 
