@@ -35,7 +35,6 @@ int main(){
         "   Wyjdz!"
     };
 
-    int defCol = 7; //Domyślny kolor tekstu;
     int selected{};
     int key_num{};
 
