@@ -28,7 +28,7 @@ int main() {
     GameMap map1{};
     Player p1("PlayerOne", &map1);
 
-    map1.loadMap(1);
+    map1.loadMap(0);
     map1.drawMap();
     
     p1.show();

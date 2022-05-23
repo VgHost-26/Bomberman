@@ -28,7 +28,7 @@ public:
 
 	void GameMap::loadMap(int name) {	//wczytuje wybraną mape
 		
-		string mapName = "map_";
+		string mapName = "maps/map_";
 		mapName += (name + 48);
 		mapName += ".txt";
 
