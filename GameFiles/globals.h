@@ -14,5 +14,5 @@ const int _D = 100;
 const int _SPACE_BAR = 32;
 const int _ENTER = 13;
 
-//LINK Game\Bomberman\GameFiles\functions_system.h#color-list
+//LINK Bomberman\GameFiles\functions_system.h#color-list
 const int defCol = 7;

@@ -26,7 +26,7 @@ int main() {
     hideCursor();
 
     GameMap map1{};
-    Player p1("PlayerOne", &map1);
+    Player p1("PlayerZero", &map1);
 
     map1.loadMap(0);
     map1.drawMap();
