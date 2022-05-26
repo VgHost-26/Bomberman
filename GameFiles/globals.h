@@ -23,3 +23,12 @@ const int defCol = 7;
 const int _DefGrey = 1;
 const int _Orange = 13;
 
+
+
+//ANCHOR sciany:
+const int _SolidWall = 1;
+const int _SemiSolidWall = 2;
+const int _SoftWall = 3;
+
+
+

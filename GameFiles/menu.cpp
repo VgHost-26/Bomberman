@@ -14,9 +14,9 @@ using namespace std;
 
 
 //biblioteki swoje
+#include "globals.h"
 #include "functions_system.h"
 #include "functions_menu.h"
-#include "globals.h"
 
 int main(){
 

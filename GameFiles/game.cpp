@@ -10,9 +10,9 @@
 
 using namespace std;
 //biblioteki swoje
+#include "globals.h"
 #include "functions_system.h"
 #include "functions_game.h"
-#include "globals.h"
 
 //klasy
 #include "GameMap.h"
@@ -28,7 +28,9 @@ int main() {
 
     GameMap map1{};
     Bomb *bombs = new Bomb[_bombsSize];
-    //Bomb bombs[6];
+    for(int i = 0; i < _bombsSize; i++){
+        bombs[i] = Bomb(&map1);
+    }
 
     Player p1("PlayerZero", &map1, &bombs);
 

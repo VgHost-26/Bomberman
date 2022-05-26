@@ -8,11 +8,12 @@ private:
     int type{};
     int timer{};
     int expSize = 4;
+    GameMap *Map = new GameMap;
     
 
 public:    
 
-   // Bomb(int,int,int);
+    Bomb(GameMap *Map);
     Bomb();
     
 
@@ -36,6 +37,11 @@ Bomb::Bomb(){
     timer = -1;
 }
 
+Bomb::Bomb(GameMap *map1){
+
+    Map = map1;
+
+}
 // Bomb::Bomb(int x, int y, int type){
 //     this->x=x;
 //     this->y=y;
@@ -72,7 +78,7 @@ int Bomb::countDown(){
     if(timer <= 0){
         clearExplode();
         return 0;
-    }else if(timer <= 10){
+    }else if(timer <= 5){
         explode(timer);
         return timer;
         
@@ -85,9 +91,11 @@ int Bomb::countDown(){
 bool Bomb::placeBomb(int x, int y, int type){
 
 
+    if(Map->map[x][y] == 0) Map->map[x][y] = type;
 
 
-    timer=30;
+    timer=25;
+
     this->x=x;
     this->y=y;
     this->type=type;
@@ -98,29 +106,138 @@ bool Bomb::placeBomb(int x, int y, int type){
 }
 
 void Bomb::explode(int t){
-    if(x >= 0 || y >= 0){ 
-    
 
+    bool stopXP = false;
+    bool stopXL = false;
+    bool stopYP = false;
+    bool stopYL = false;
+
+    if(x >= 0 || y >= 0){ 
         for(int i = 0; i < expSize; i++){
-            drawFire(x + i, y, t);
-            drawFire(x - i, y, t);
-            drawFire(x, y + i, t);
-            drawFire(x, y - i, t);
+
+            if(!stopXP){
+                if(Map->map[x+i][y] == 0){
+                    drawFire(x + i, y, t);
+
+                }else if(Map->map[x+i][y] == 1){
+                    stopXP = true;
+
+                }else if(Map->map[x+i][y] >= 2 && Map->map[x+i][y] <= 9){
+                    stopXP = true;
+                    drawFire(x + i, y, t);
+                }
+            }
+            if(!stopXL){
+                if(Map->map[x-i][y] == 0){
+                    drawFire(x - i, y, t);
+
+                }else if(Map->map[x-i][y] == 1){
+                    stopXL = true;
+
+                }else if(Map->map[x-i][y] >= 2 && Map->map[x-i][y] <= 9){
+                    stopXL = true;
+                    drawFire(x - i, y, t);
+                }
+            }
+            if(!stopYP){
+                if(Map->map[x][y + i] == 0){
+                    drawFire(x, y + i, t);
+
+                }else if(Map->map[x][y + i] == 1){
+                    stopYP = true;
+
+                }else if(Map->map[x][y + i] >= 2 && Map->map[x][y + i] <= 9){
+                    stopYP = true;
+                    drawFire(x, y + i, t);
+                }
+            }
+            if(!stopYL){
+                if(Map->map[x][y - i] == 0){
+                    drawFire(x, y - i, t);
+
+                }else if(Map->map[x][y - i] == 1){
+                    stopYL = true;
+
+                }else if(Map->map[x][y - i] >= 2 && Map->map[x][y - i] <= 9){
+                    stopYL = true;
+                    drawFire(x, y - i, t);
+                }
+            }
+            
         }
+      
     }
 
    
 }
 void Bomb::clearExplode(){
     if(x >= 0 || y >= 0){ 
-    timer = -1;
-    
-    
+
+        bool stopXP = false;
+        bool stopXL = false;
+        bool stopYP = false;
+        bool stopYL = false;
+
+        timer = -1;
+
+        cls(x, y);
+
         for(int i = 0; i < expSize; i++){
-            cls(x + i, y);
-            cls(x - i, y);
-            cls(x, y + i);
-            cls(x, y - i);
+
+            if(!stopXP){
+                if(Map->map[x+i][y] == 0){
+                    cls(x + i, y);
+
+                }else if(Map->map[x+i][y] == 1){
+                    stopXP = true;
+
+                }else if(Map->map[x+i][y] >= 2 && Map->map[x+i][y] <= 9){
+                    stopXP = true;
+                    Map->map[x + i][y] = 0;
+                    cls(x + i, y);
+                    
+                }
+            }
+            if(!stopXL){
+                if(Map->map[x-i][y] == 0){
+                    cls(x - i, y);
+
+                }else if(Map->map[x-i][y] == 1){
+                    stopXL = true;
+
+                }else if(Map->map[x-i][y] >= 1 && Map->map[x-i][y] <= 9){
+                    stopXL = true;
+                    if(Map->map[x-i][y] > 1 && Map->map[x-i][y] <= 9) Map->map[x - i][y] = 0;
+                    cls(x - i, y);
+                }
+            }
+            if(!stopYP){
+                if(Map->map[x][y + i] == 0){
+                    cls(x, y + i);
+
+                }else if(Map->map[x][y + i] == 1){
+                    stopYP = true;
+
+                }else if(Map->map[x][y + i] >= 1 && Map->map[x][y + i] <= 9){
+                    stopYP = true;
+                    if(Map->map[x][y + i] > 1 && Map->map[x][y + i] <= 9)Map->map[x][y + i] = 0;
+                    cls(x, y + i);
+                }
+            }
+            if(!stopYL){
+                if(Map->map[x][y - i] == 0){
+                    cls(x, y - i);
+
+                }else if(Map->map[x][y - i] == 1){
+                    stopYL = true;
+
+                }else if(Map->map[x][y - i] >= 1 && Map->map[x][y - i] <= 9){
+                    stopYL = true;
+                    if(Map->map[x][y - i] > 1 && Map->map[x][y - i] <= 9)Map->map[x][y - i] = 0;
+                    cls(x, y - i);
+                }
+            }
+        
         }
     }
    
