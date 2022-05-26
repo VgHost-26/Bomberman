@@ -43,7 +43,7 @@ public:
 		if(Map->map[X + dir][Y] != 0 || (X + dir >= (sizeX - 1) || X + dir <= 1)){
 			return false;
 		}else{
-			Map->cls(X * 2,Y);
+			cls(X * 2,Y);
 			X += dir;
 			show();
 			return true;
@@ -57,7 +57,7 @@ public:
 		if(Map->map[X][Y + dir] != 0 || (Y + dir >= (sizeY - 1) || Y + dir <= 1)){
 			return false;
 		}else{
-			Map->cls(X * 2,Y);
+			cls(X * 2,Y);
 			Y += dir;
 			show();
 			return true;

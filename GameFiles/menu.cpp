@@ -11,7 +11,7 @@
 
 using namespace std;
 
-HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
 
 //biblioteki swoje
 #include "functions_system.h"

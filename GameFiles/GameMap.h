@@ -10,20 +10,13 @@ public:
 	
 
 
-	void cls(int, int);
+	//void cls(int, int);
 	void loadMap(int);
 	void drawBrick(int, int);
 	void drawMap();
 	/*----------------------------------------------*/
 };
-	void GameMap::cls(int x, int y){		//wyczyszcza jeden wybrany pixel na mapie 
-		setCursorPosition(x*2,y*2);
-		cout<<" "<<" ";
-		cout<<" "<<" ";
-		setCursorPosition(x*2,y*2 + 1);
-		cout<<" "<<" ";
-		cout<<" "<<" ";
-	}
+	
 
 
 	void GameMap::loadMap(int name) {	//wczytuje wybraną mape

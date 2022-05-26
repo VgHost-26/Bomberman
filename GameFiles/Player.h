@@ -1,19 +1,21 @@
 #pragma once
 class Player : public Being{
 	friend class GameMap;
+	friend class Bomb;
 private:
 
 	string name{};
-	
-
+	Bomb *bombs = new Bomb[6];
 public:
 
 	//konstruktor
-	Player(string name, GameMap *map1){
+	Player(string name, GameMap *map1, Bomb *bombs[]){
 		X=1;
 		Y=1;
 		this->name=name;
 		Map = map1;
+		this->bombs = *bombs;
+
 	}
 
 	//SECTION getery:
@@ -29,7 +31,7 @@ public:
 	void show();
 	bool moveX(int);
 	bool moveY(int);
-	bool moveDir(int, int, int, int, int, int(f1)());
+	bool control(int, int, int, int, int, int(f1)());
 	bool plantBomb(int);
 	
 	//!SECTION
@@ -50,7 +52,7 @@ public:
 		if(Map->map[X + dir][Y] != 0 || (X + dir >= (sizeX - 1) || X + dir <= 0)){
 			return false;
 		}else{
-			if(Map->map[X][Y]==0) Map->cls(X * 2,Y);
+			if(Map->map[X][Y]==0) cls(X,Y);
 			X += dir;
 			show();
 			return true;
@@ -64,14 +66,14 @@ public:
 		if(Map->map[X][Y + dir] != 0 || (Y + dir >= (sizeY - 1) || Y + dir <= 0)){
 			return false;
 		}else{
-			if(Map->map[X][Y]==0) Map->cls(X * 2,Y);
+			if(Map->map[X][Y]==0) cls(X,Y);
 			Y += dir;
 			show();
 			return true;
 		}
 		return false;
 	}
-	bool Player::moveDir(int w, int a, int s, int d, int bomb, int(f1)()){		// funkcja do poruszania si© //skˆadowe: klawisz w g¢re, lewo, d¢ˆ, prawo, funkcja do pobierania klawiszy
+	bool Player::control(int w, int a, int s, int d, int bombKey, int(f1)()){		// funkcja do poruszania si© //skˆadowe: klawisz w g¢re, lewo, d¢ˆ, prawo, funkcja do pobierania klawiszy
 		
 		int key{};
 		key = f1();
@@ -88,7 +90,7 @@ public:
 		}else if(key == d){ //prawo
 			return moveX(1);
 
-		}else if(key == bomb){
+		}else if(key == bombKey){
 			return plantBomb(10);
 		}
 		
@@ -97,12 +99,25 @@ public:
 
 	bool Player::plantBomb(int type){	//kˆadzie bombe w aktualnym miejscu gdzie si© znajduje
 		
-		if(Map->map[X][Y] == 0) Map->map[X][Y] = type;
+		
 
-		setCursorPosition(X * 4,Y * 2);
-		cout<<"/  "<<char(92);
-		setCursorPosition(X * 4,Y * 2 + 1);
-		cout<<char(92)<<"__/";
+		for(int i = 0; i < _bombsSize; i++){
+			if(!bombs[i].isExist()){
+
+
+				if(Map->map[X][Y] == 0) Map->map[X][Y] = type;
+
+				setCursorPosition(X * 4,Y * 2);
+				cout<<"/  "<<char(92);
+				setCursorPosition(X * 4,Y * 2 + 1);
+				cout<<char(92)<<"__/";
+
+				bombs[i].placeBomb(X,Y,1);
+				Map->map[X][Y] = 30;	//30 - typ bomby
+				break;
+			} 
+		}
+
 		
 		return false;
 	}
