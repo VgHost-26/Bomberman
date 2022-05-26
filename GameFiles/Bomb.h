@@ -38,8 +38,14 @@ Bomb::Bomb(){
 }
 
 Bomb::Bomb(GameMap *map1){
+    
+    Map = map1; 
 
-    Map = map1;
+    x = -1;
+    y = -1;
+    type = -1;
+    timer = -1;
+
 
 }
 // Bomb::Bomb(int x, int y, int type){
@@ -107,12 +113,12 @@ bool Bomb::placeBomb(int x, int y, int type){
 
 void Bomb::explode(int t){
 
-    bool stopXP = false;
-    bool stopXL = false;
-    bool stopYP = false;
-    bool stopYL = false;
-
     if(x >= 0 || y >= 0){ 
+        bool stopXP = false;
+        bool stopXL = false;
+        bool stopYP = false;
+        bool stopYL = false;
+
         for(int i = 0; i < expSize; i++){
 
             if(!stopXP){
