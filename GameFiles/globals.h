@@ -9,6 +9,7 @@ const int sizeY = 17;
 //NOTE wszystkei operacje na X-ach gdy coï¿½ jest wyï¿½wietlane robimy razy 2
 
 const int _bombsSize = 6;
+const int _EnemiesCount = 8;
 
 //ANCHOR Klawisze deklaracje
 const int _W = 119;
@@ -23,12 +24,23 @@ const int defCol = 7;
 const int _DefGrey = 1;
 const int _Orange = 13;
 
+/*
+    free space: 0
+    ˜ciany: 1 - 5
+    enemies: 6 - 9
+    bombs: 30 - 39
+
+
+*/
 
 
 //ANCHOR sciany:
 const int _SolidWall = 1;
-const int _SemiSolidWall = 2;
-const int _SoftWall = 3;
+const int _SoftWall = 2;
+const int _SemiSolidWall = 3;
 
+//ANCHOR enemies
+const int _EnemyBasic = 6;
+const int _EnemyFast = 7;
 
 

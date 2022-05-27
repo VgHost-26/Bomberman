@@ -5,7 +5,12 @@ class Player : public Being{
 private:
 
 	string name{};
+	int lifes = 3;
+	int score = 0;
 	Bomb *bombs = new Bomb[6];
+
+
+
 public:
 
 	//konstruktor
@@ -107,13 +112,9 @@ public:
 
 				//if(Map->map[X][Y] == 0) Map->map[X][Y] = type;
 
-				setCursorPosition(X * 4,Y * 2);
-				cout<<"/  "<<char(92);
-				setCursorPosition(X * 4,Y * 2 + 1);
-				cout<<char(92)<<"__/";
+				
 
-				bombs[i].placeBomb(X,Y,10);
-				Map->map[X][Y] = 30;	//30 - typ bomby
+				bombs[i].placeBomb(X,Y,30);	//30 - typ bomby
 				break;
 			} 
 		}

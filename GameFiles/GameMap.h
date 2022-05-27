@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 class GameMap {
-
+	friend class Enemy;
 private:
 
 	
@@ -44,22 +44,19 @@ public:
 						cout << " " << " ";
 						break;
 					*/
-					case 1 :	// jakaś ściana
+					case _SolidWall :	// solid wall
 						cout << char(219) << char(219);	// ██
 						break;
-					case 2 :	// inna ściana
+					case _SoftWall :	// soft wall
 						cout << char(176) << char(176);	//░░
 						break;
-					case 3 :	// i tak 
+					case _SemiSolidWall :	//
 						cout << "EE";
 						break;
-					case 4 :	// dalej
+					case 4 :	//
 						cout << "EE";
 						break;
 					case 5 :	//
-						cout << "EE";
-						break;
-					case 6 :	//
 						cout << "EE";
 						break;
 

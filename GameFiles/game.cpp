@@ -25,12 +25,18 @@ int main() {
     
     setConsoleSize();
     hideCursor();
-
+    
     GameMap map1{};
+
+    //Tworzenie tablicy bomb
     Bomb *bombs = new Bomb[_bombsSize];
     for(int i = 0; i < _bombsSize; i++){
         bombs[i] = Bomb(&map1);
     }
+
+    //Tworzenie tablicy wrogow
+    Enemy *enemies = new Enemy[_EnemiesCount];
+    
 
     Player p1("PlayerZero", &map1, &bombs);
 
@@ -63,6 +69,7 @@ int main() {
     system("pause");
 
     delete [] bombs;
+    delete [] enemies;
 
     return 0;
 

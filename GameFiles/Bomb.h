@@ -21,7 +21,7 @@ public:
     int getX();
     int getY();
     bool placeBomb(int,int,int);;
-    void explode(int);
+    int explode(int);
     void clearExplode();
     int countDown();
     void drawFire(int, int, int);
@@ -96,6 +96,10 @@ int Bomb::countDown(){
 
 bool Bomb::placeBomb(int x, int y, int type){
 
+    setCursorPosition(x * 4,y * 2);
+    cout<<"/  "<<char(92);
+    setCursorPosition(x * 4,y * 2 + 1);
+    cout<<char(92)<<"__/";
 
     if(Map->map[x][y] == 0) Map->map[x][y] = type;
 
@@ -111,9 +115,11 @@ bool Bomb::placeBomb(int x, int y, int type){
     return false;
 }
 
-void Bomb::explode(int t){
+int Bomb::explode(int t){
 
     if(x >= 0 || y >= 0){ 
+        drawFire(x, y, t);
+
         bool stopXP = false;
         bool stopXL = false;
         bool stopYP = false;
@@ -174,6 +180,7 @@ void Bomb::explode(int t){
       
     }
 
+    return 0;
    
 }
 void Bomb::clearExplode(){
