@@ -55,13 +55,13 @@ int main() {
 
         key = getKey();    
         p1.control(_W, _A, _S, _D, _SPACE_BAR, key);
-        p2.control(_NUM_UP, _NUM_LEFT, _NUM_MID, _NUM_RIGHT, _NUM_ZERO, key); 
+        p2.control(_NUM_UP, _NUM_LEFT, _NUM_BOT, _NUM_RIGHT, _NUM_ZERO, key); 
 
         
         
         
         
-      //  cout<<_getch()<<endl;
+      // cout<<_getch()<<endl;
 
         for(int i=0;i<_bombsSize;i++){
             if(bombs[i].countDown() == 0){
