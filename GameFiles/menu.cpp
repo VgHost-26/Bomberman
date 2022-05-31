@@ -22,6 +22,7 @@ int main(){
 
     setConsoleSize();
     hideCursor();
+    setColors();
 
     //pobieranie wielko�ci konsoli (centrowanie)
     CONSOLE_SCREEN_BUFFER_INFO csbi;    
@@ -42,7 +43,7 @@ int main(){
     printBomob();
     helpButtons(winWidth-30, winHeight-1);
 
-    select(menuList, 3, selected, defCol, 9, middleCalc(winWidth, 5));
+    select(menuList, 3, selected, defCol, _Orange, middleCalc(winWidth, 5));
 
     while (1) {
 
@@ -53,7 +54,7 @@ int main(){
             if(selected>0) {
 
                 selected--;
-                select(menuList, 3, selected, defCol, 9, middleCalc(winWidth, 5));
+                select(menuList, 3, selected, defCol, _Orange, middleCalc(winWidth, 5));
             }
 
         } else if(key_num==80) {  //Strzalka w dol
@@ -61,7 +62,24 @@ int main(){
             if(selected<2) {
 
                 selected++;
-                select(menuList, 3, selected, defCol, 9, middleCalc(winWidth, 5));
+                select(menuList, 3, selected, defCol, _Orange, middleCalc(winWidth, 5));
+            }
+        } else if(key_num==13) { //ENTER
+
+            if(selected==0){  //instrukcja
+                cout<<"GraC";
+            }
+
+            if(selected==1){  //instrukcja
+                cout<<"Jak graC";
+            }
+
+            if(selected==2){  //exit
+                //select(menuList, 4, selected, defCol, defCol, middleCalc(winWidth, 5));
+
+                if(confirm(middleCalc(winWidth, -10), 25, defCol, _Orange, true, "Na pewno?")) return 0;  //wyswietlenie ramki z zapytaniem "czy na pewno"
+
+                //select(menuList, 4, selected, defCol, _Orange, middleCalc(winWidth, 5));
             }
         }
     }
