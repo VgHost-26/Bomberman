@@ -25,6 +25,7 @@ int main() {
     
     setConsoleSize();
     hideCursor();
+    setColors();
     
     GameMap map1{};
 
@@ -34,23 +35,33 @@ int main() {
         bombs[i] = Bomb(&map1);
     }
 
-    //Tworzenie tablicy wrogow
+    //Tworzenie tabl`icy wrogow
     Enemy *enemies = new Enemy[_EnemiesCount];
     
 
-    Player p1("PlayerZero", &map1, &bombs);
+    Player p1("PlayerOne", &map1, &bombs);
+    Player p2("PlayerTwo", &map1, &bombs, sizeX-2, sizeY-2);
 
     map1.loadMap(0);
     map1.drawMap();
     
     p1.show();
-    setColors();
+    p2.show();
 
+    int key{};
       
     while(1){
+
+
+        key = getKey();    
+        p1.control(_W, _A, _S, _D, _SPACE_BAR, key);
+        p2.control(_NUM_UP, _NUM_LEFT, _NUM_MID, _NUM_RIGHT, _NUM_ZERO, key); 
+
         
-        p1.control(_W, _A, _S, _D, _SPACE_BAR, getKey);
         
+        
+        
+      //  cout<<_getch()<<endl;
 
         for(int i=0;i<_bombsSize;i++){
             if(bombs[i].countDown() == 0){
@@ -66,7 +77,7 @@ int main() {
     }
 
     setCursorPosition(100,50);
-    system("pause");
+   // system("pause");
 
     delete [] bombs;
     delete [] enemies;
