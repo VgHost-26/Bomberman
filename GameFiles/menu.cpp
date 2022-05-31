@@ -66,8 +66,9 @@ int main(){
             }
         } else if(key_num==13) { //ENTER
 
-            if(selected==0){  //instrukcja
-                cout<<"GraC";
+            if(selected==0){  //graj
+                system("start game.exe");
+                return 0;
             }
 
             if(selected==1){  //instrukcja
