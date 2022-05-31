@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 class GameMap {
-
+	friend class Enemy;
 private:
 
 	
@@ -10,25 +10,18 @@ public:
 	
 
 
-	void cls(int, int);
+	//void cls(int, int);
 	void loadMap(int);
 	void drawBrick(int, int);
 	void drawMap();
 	/*----------------------------------------------*/
 };
-	void GameMap::cls(int x, int y){		//wyczyszcza jeden wybrany pixel na mapie 
-		setCursorPosition(x*2,y*2);
-		cout<<" "<<" ";
-		cout<<" "<<" ";
-		setCursorPosition(x*2,y*2 + 1);
-		cout<<" "<<" ";
-		cout<<" "<<" ";
-	}
+	
 
 
 	void GameMap::loadMap(int name) {	//wczytuje wybraną mape
 		
-		string mapName = "map_";
+		string mapName = "maps/map_";
 		mapName += (name + 48);
 		mapName += ".txt";
 
@@ -51,22 +44,19 @@ public:
 						cout << " " << " ";
 						break;
 					*/
-					case 1 :	// jakaś ściana
+					case _SolidWall :	// solid wall
 						cout << char(219) << char(219);	// ██
 						break;
-					case 2 :	// inna ściana
+					case _SoftWall :	// soft wall
 						cout << char(176) << char(176);	//░░
 						break;
-					case 3 :	// i tak 
+					case _SemiSolidWall :	//
 						cout << "EE";
 						break;
-					case 4 :	// dalej
+					case 4 :	//
 						cout << "EE";
 						break;
 					case 5 :	//
-						cout << "EE";
-						break;
-					case 6 :	//
 						cout << "EE";
 						break;
 

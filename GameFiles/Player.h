@@ -1,48 +1,45 @@
 #pragma once
 class Player : public Being{
 	friend class GameMap;
+	friend class Bomb;
 private:
 
 	string name{};
-	
+	int lifes = 3;
+	int score = 0;
+	Bomb *bombs = new Bomb[6];
+
+
 
 public:
 
 	//konstruktor
-	Player(string name, GameMap *map1){
+	Player(string name, GameMap *map1, Bomb *bombs[]){
 		X=1;
 		Y=1;
 		this->name=name;
 		Map = map1;
+		this->bombs = *bombs;
+
 	}
 
-	//setery
-	void setX(int x) {
-		X = x;
-	}
-	void setY(int y) {
-		Y = y;
-	}
-	
+	//SECTION getery:
 
-	//getery
-	int getX() {
-		return X;
-	}
-	int getY() {
-		return Y;
-	}
 	string getName(){
 		return name;
 	}
 
-	//metody
+	//!SECTION
+
+	//SECTION metody
 
 	void show();
 	bool moveX(int);
 	bool moveY(int);
-	bool moveDir(int, int, int, int, int(f1)());
-
+	bool control(int, int, int, int, int, int(f1)());
+	bool plantBomb(int);
+	
+	//!SECTION
 
 
 };
@@ -60,7 +57,7 @@ public:
 		if(Map->map[X + dir][Y] != 0 || (X + dir >= (sizeX - 1) || X + dir <= 0)){
 			return false;
 		}else{
-			Map->cls(X * 2,Y);
+			if(Map->map[X][Y]==0) cls(X,Y);
 			X += dir;
 			show();
 			return true;
@@ -74,14 +71,14 @@ public:
 		if(Map->map[X][Y + dir] != 0 || (Y + dir >= (sizeY - 1) || Y + dir <= 0)){
 			return false;
 		}else{
-			Map->cls(X * 2,Y);
+			if(Map->map[X][Y]==0) cls(X,Y);
 			Y += dir;
 			show();
 			return true;
 		}
 		return false;
 	}
-	bool Player::moveDir(int w, int a, int s, int d, int(f1)()){		// funkcja do poruszania si© //skˆadowe: klawisz w g¢re, lewo, d¢ˆ, prawo, funkcja do pobierania klawiszy
+	bool Player::control(int w, int a, int s, int d, int bombKey, int(f1)()){		// funkcja do poruszania si© //skˆadowe: klawisz w g¢re, lewo, d¢ˆ, prawo, funkcja do pobierania klawiszy
 		
 		int key{};
 		key = f1();
@@ -98,9 +95,32 @@ public:
 		}else if(key == d){ //prawo
 			return moveX(1);
 
+		}else if(key == bombKey){
+			return plantBomb(10);
 		}
 		
     	return 0;
+	}
+
+	bool Player::plantBomb(int type){	//kˆadzie bombe w aktualnym miejscu gdzie si© znajduje
+		
+		
+
+		for(int i = 0; i < _bombsSize; i++){
+			if(!bombs[i].isExist()){
+
+
+				//if(Map->map[X][Y] == 0) Map->map[X][Y] = type;
+
+				
+
+				bombs[i].placeBomb(X,Y,30);	//30 - typ bomby
+				break;
+			} 
+		}
+
+		
+		return false;
 	}
 
 	

@@ -27,9 +27,9 @@ void setColors() {      //ustawienie domyslnej palety kolorów dla ca³ej gry
 	info.ColorTable[8] =  RGB(0, 0, 0);   //
 	info.ColorTable[9] =  RGB(0, 0, 0);   //
 	info.ColorTable[10] = RGB(0, 0, 0);   //
-	info.ColorTable[12] = RGB(0, 0, 0);   //
-	info.ColorTable[13] = RGB(0, 0, 0);   //
-	info.ColorTable[14] = RGB(0, 0, 0);   //
+	info.ColorTable[12] = RGB(255, 0, 0);   //
+	info.ColorTable[13] = RGB(255,153,51);   //orange
+	info.ColorTable[14] = RGB(0, 0, 255);   //
 
 	SetConsoleScreenBufferInfoEx(hConsole, &info);
 
