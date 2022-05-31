@@ -79,7 +79,7 @@ int main(){
             if(selected==2){  //exit
                 //select(menuList, 4, selected, defCol, defCol, middleCalc(winWidth, 5));
 
-                if(confirm(middleCalc(winWidth, -10), 25, defCol, _Orange, true, "Na pewno?")) return 0;  //wyswietlenie ramki z zapytaniem "czy na pewno"
+                if(confirm(middleCalc(winWidth, -10), 25, defCol, _Orange, true, "Jestes pewien?")) return 0;  //wyswietlenie ramki z zapytaniem "czy na pewno"
 
                 //select(menuList, 4, selected, defCol, _Orange, middleCalc(winWidth, 5));
             }
