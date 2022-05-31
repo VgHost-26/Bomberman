@@ -27,6 +27,7 @@ const int _NUM_UP = 56;
 const int _NUM_LEFT = 52;
 const int _NUM_MID = 53;
 const int _NUM_RIGHT = 54;
+const int _NUM_BOT = 50;
 const int _NUM_ZERO = 48;
 
 const int _ENTER = 13;

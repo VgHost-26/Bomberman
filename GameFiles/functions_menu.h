@@ -75,10 +75,10 @@ bool confirm(int x, int y, int dCol, int sCol, bool border=0, string msg=""){ //
         //rysowanie ramki jesli tak wybrano
         int tmp=1;
         if(msg!=""){
-            setCursorPosition(x - 1, y - 1);
-            cout.width( 11 - (11 - msg.length())/2 );
+            setCursorPosition(x - 3, y - 1);
+            cout.width( 16 - (16 - msg.length())/2 );
             cout<<msg;
-            cout.width( (11 - msg.length())/2 +1 );
+            cout.width( (16 - msg.length())/2 +1 );
             tmp=2;
         }
     }
@@ -109,10 +109,10 @@ bool confirm(int x, int y, int dCol, int sCol, bool border=0, string msg=""){ //
             tn=1;
         }
         if(k==13){   //enter
-            clearLine(x-2,y,  13);
-            clearLine(x-2,y-2,13);
-            clearLine(x-2,y-1,13);
-            clearLine(x-2,y+1,13);
+            clearLine(x-2,y,  17);
+            clearLine(x-2,y-2,17);
+            clearLine(x-2,y-1,17);
+            clearLine(x-2,y+1,17);
             return tn;
         }
     }
