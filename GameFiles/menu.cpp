@@ -71,7 +71,8 @@ int main(){
             }
 
             if(selected==1){  //instrukcja
-                cout<<"Jak graC";
+                system("start howtoplay.cpp");
+                return 0;
             }
 
             if(selected==2){  //exit
