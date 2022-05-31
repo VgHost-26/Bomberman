@@ -22,6 +22,14 @@ public:
 		this->bombs = *bombs;
 
 	}
+	Player(string name, GameMap *map1, Bomb *bombs[], int x, int y){
+		X=x;
+		Y=y;
+		this->name=name;
+		Map = map1;
+		this->bombs = *bombs;
+
+	}
 
 	//SECTION getery:
 
@@ -36,7 +44,7 @@ public:
 	void show();
 	bool moveX(int);
 	bool moveY(int);
-	bool control(int, int, int, int, int, int(f1)());
+	bool control(int, int, int, int, int, int);
 	bool plantBomb(int);
 	
 	//!SECTION
@@ -78,10 +86,9 @@ public:
 		}
 		return false;
 	}
-	bool Player::control(int w, int a, int s, int d, int bombKey, int(f1)()){		// funkcja do poruszania si© //skˆadowe: klawisz w g¢re, lewo, d¢ˆ, prawo, funkcja do pobierania klawiszy
+	bool Player::control(int w, int a, int s, int d, int bombKey, int key){		// funkcja do poruszania si© //skˆadowe: klawisz w g¢re, lewo, d¢ˆ, prawo, funkcja do pobierania klawiszy
 		
-		int key{};
-		key = f1();
+		
 
 		if(key == w){
 			return moveY(-1);
@@ -97,6 +104,8 @@ public:
 
 		}else if(key == bombKey){
 			return plantBomb(10);
+		}else{
+			return 0;
 		}
 		
     	return 0;
