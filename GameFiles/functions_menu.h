@@ -75,7 +75,7 @@ bool confirm(int x, int y, int dCol, int sCol, bool border=0, string msg=""){ //
         //rysowanie ramki jesli tak wybrano
         int tmp=1;
         if(msg!=""){
-            setCursorPosition(x, y - 1);
+            setCursorPosition(x - 1, y - 1);
             cout.width( 11 - (11 - msg.length())/2 );
             cout<<msg;
             cout.width( (11 - msg.length())/2 +1 );
