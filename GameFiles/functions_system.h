@@ -24,6 +24,7 @@ void setColors() {      //ustawienie domyslnej palety kolor�w dla ca�ej gry
 	info.ColorTable[4] =  RGB(0, 0, 0);   //
 	info.ColorTable[5] =  RGB(0, 0, 0);   //
 	info.ColorTable[6] =  RGB(0, 0, 0);   //
+	info.ColorTable[7] =  RGB(0, 0, 0);   //
 	info.ColorTable[8] =  RGB(0, 0, 0);   //
 	info.ColorTable[9] =  RGB(0, 0, 0);   //
 	info.ColorTable[10] = RGB(0, 250, 60);   //green

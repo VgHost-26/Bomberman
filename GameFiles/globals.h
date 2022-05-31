@@ -33,7 +33,7 @@ const int _NUM_ZERO = 48;
 const int _ENTER = 13;
 
 //LINK Bomberman\GameFiles\functions_system.h#color-list
-const int defCol = 7;
+const int defCol = 1;
 const int _DefGrey = 1;
 const int _LightGrey = 2;
 const int _Yellow = 12;
