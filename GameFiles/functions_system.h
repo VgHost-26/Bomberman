@@ -67,6 +67,7 @@ void setConsoleSize() {      //ustawienie konsoli na pe�ny ekran oraz dopasowa
 	// system("mode con COLS=700");
 	// ShowWindow(GetConsoleWindow(), SW_MAXIMIZE);
 	// SendMessage(GetConsoleWindow(), WM_SYSKEYDOWN, VK_RETURN, 0x20000000);
+    SendMessage(GetConsoleWindow(), WM_SYSKEYDOWN, VK_RETURN, 0x20000000); //ALT+ENTER
 
 	ShowScrollBar(GetConsoleWindow(), SB_BOTH, 0);  //schowania scrollbara
 
