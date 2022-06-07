@@ -37,6 +37,36 @@ void printBomob(){   //wyswietlanie kolorowej bomby w logo
     plik.close();  
 }
 
+void printIntro(int place, int winWidth, int winHeight){   //wyswietlanie animacji intra   
+    
+    fstream plik;
+    string line{};
+    SetConsoleTextAttribute(hConsole, defCol);
+
+    int k=0, p=0;
+
+    while (p<=90) {
+        plik.open("intro.txt");
+        for(int i=0;i<76;i++){
+            //cout.width(place);
+
+            getline(plik,line);
+
+            if(line!=" ") {
+                setCursorPosition(winWidth-p,((winHeight/2-14))+k);
+                cout<<line<<endl;
+                k++;
+            }
+            else {
+                k=0; p+=10;
+                Sleep(100);
+                system("cls");
+            }
+        }
+        plik.close();
+    }  
+}
+
 int middleCalc(int winWidth, int objWidth){     //obliczanie miejsca na środku ekranu dla konkretnego elementu wzgledem szerokości ekranu
     return winWidth-((winWidth-objWidth)/2);
 }

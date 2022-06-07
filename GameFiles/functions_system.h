@@ -62,12 +62,12 @@ void setConsoleSize() {      //ustawienie konsoli na pe�ny ekran oraz dopasowa
 		res = W;
 	}
 
+    SendMessage(GetConsoleWindow(), WM_SYSKEYDOWN, VK_RETURN, 0x20000000); //ALT+ENTER
 	SetConsoleDisplayMode(GetStdHandle(STD_OUTPUT_HANDLE), CONSOLE_FULLSCREEN_MODE, 0); //pelny ekran ... i cztery nast�pne te�
 	// system("mode 650");
 	// system("mode con COLS=700");
 	// ShowWindow(GetConsoleWindow(), SW_MAXIMIZE);
 	// SendMessage(GetConsoleWindow(), WM_SYSKEYDOWN, VK_RETURN, 0x20000000);
-    SendMessage(GetConsoleWindow(), WM_SYSKEYDOWN, VK_RETURN, 0x20000000); //ALT+ENTER
 
 	ShowScrollBar(GetConsoleWindow(), SB_BOTH, 0);  //schowania scrollbara
 
