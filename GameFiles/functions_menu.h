@@ -98,7 +98,7 @@ void printIntro(double winWidth, double winHeight, int time, int step){   //wysw
         else {
             if (i==43) Sleep(time*5);
             up_position=0;
-            Sleep(time*1.5);
+            Sleep(time*2);
             system("cls");
         }
     }
