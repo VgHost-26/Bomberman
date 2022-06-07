@@ -30,7 +30,14 @@ int main() {
     int winWidth = csbi.dwMaximumWindowSize.X;
     int winHeight = csbi.dwMaximumWindowSize.Y;
 
-    printIntro(middleCalc(winWidth, 40),winWidth, winHeight);
+    printIntro(winWidth, winHeight, 50, 5);
 
-    //system("start menu.exe");
+    printBomob();
+    Sleep(50*20);
+    system("cls");
+    printLogo(defCol, middleCalc(winWidth, 119));
+    printBomob();
+    Sleep(50*20);
+
+    system("start menu.exe");
 }
