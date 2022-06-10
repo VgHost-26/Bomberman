@@ -11,6 +11,12 @@ void setCursorPosition(int x, int y) {    //ustawinei pozycji kursora w konsoli
 	COORD coord = { (SHORT)x, (SHORT)y };
 	SetConsoleCursorPosition(hOut, coord);
 }
+
+void changeColor(int color){	//zmiana aktualnie wyswietlanego koloru
+	SetConsoleTextAttribute(hConsole, color);
+    
+}
+
 void setColors() {      //ustawienie domyslnej palety kolor�w dla ca�ej gry    
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_SCREEN_BUFFER_INFOEX info;

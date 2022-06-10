@@ -3,7 +3,7 @@
 class GameMap {
 	friend class Enemy;
 private:
-
+	int timer{};
 	
 public:
 	int map[sizeX][sizeY];

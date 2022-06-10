@@ -5,6 +5,7 @@ class Scoreboard {
     friend class GameMap;
 
 private:
+	float time = 133; //sekund
 	int width;
 	Player p1{}, p2{};
 
@@ -29,35 +30,59 @@ Scoreboard::Scoreboard(Player *p1, Player *p2){
 void Scoreboard::show(){
 
     setCursorPosition((sizeX * 4 ) + 1, 3);
-    cout << p1.getName();
-    setCursorPosition((sizeX * 4 ) + 1, 5);
-	cout << "Lifes: " << p1.getLifes();
+	cout << "Time left: " << secToTime(time);
+
     setCursorPosition((sizeX * 4 ) + 1, 7);
+    cout << p1.getName();
+    setCursorPosition((sizeX * 4 ) + 1, 9);
+	cout << "Lifes: " << p1.getLifes();
+    setCursorPosition((sizeX * 4 ) + 1, 11);
 	cout << "Score: " << p1.getScore();
 	
 
-	setCursorPosition((sizeX * 4 ) + 1, 1 + sizeY);
+	setCursorPosition((sizeX * 4 ) + 1, 2 + sizeY);
     cout << p2.getName();
-    setCursorPosition((sizeX * 4 ) + 1, 3 + sizeY);
+    setCursorPosition((sizeX * 4 ) + 1, 4 + sizeY);
 	cout << "Lifes: " << p2.getLifes();
-    setCursorPosition((sizeX * 4 ) + 1, 5 + sizeY);
+    setCursorPosition((sizeX * 4 ) + 1, 6 + sizeY);
 	cout << "Score: " << p2.getScore();
     
 
 }
 void Scoreboard::setBorder(){
 
-    drawLine(2,0);
-    drawLine(2, (sizeY * 2) -2);
-	drawLine(1, sizeY-1);
+    drawLine(2, 0);
+    drawLine(1, 5);
+	drawLine(1, sizeY);
+    drawLine(2, (sizeY * 2) - 2);
     
   //  for(int i =)
     
 
 }
 void Scoreboard::update(){
+	time-=1;
 
-    setCursorPosition(sizeX, 0);
+	if(time <= 30) changeColor(_Orange);
+	if(time <= 10) changeColor(_Red);
+
+
+    setCursorPosition((sizeX * 4 ) + 1 + 11, 3);
+	cout << secToTime(time);
+
+	changeColor(_DefGrey);
+
+    setCursorPosition((sizeX * 4 ) + 1 + 7, 9);
+	cout << p1.getLifes();
+    setCursorPosition((sizeX * 4 ) + 1 + 7, 11);
+	cout << p1.getScore();
+	
+
+	
+    setCursorPosition((sizeX * 4 ) + 1 + 7, 4 + sizeY);
+	cout << p2.getLifes();
+    setCursorPosition((sizeX * 4 ) + 1 + 7, 6 + sizeY);
+	cout << p2.getScore();
    
     
 

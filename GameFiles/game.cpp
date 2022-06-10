@@ -54,7 +54,7 @@ int main() {
     scoreboard.show();
 
     int key{};
-      
+    int FakeTimer=0;
     while(1){
 
 
@@ -76,7 +76,9 @@ int main() {
             
             
         }
-
+        
+        scoreboard.update();
+        
         Sleep(100);
         
     }
