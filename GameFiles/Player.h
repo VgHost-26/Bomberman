@@ -7,6 +7,7 @@ private:
 	string name{};
 	int lifes = 3;
 	int score = 0;
+	int color = 1;
 	Bomb *bombs = new Bomb[6];
 
 
@@ -52,12 +53,15 @@ public:
 
 };
 	void Player::show(){	//wy˜wietla gracza na mapie na jego aktualnej pozycji
+		
+		SetConsoleTextAttribute(hConsole, color);
 		setCursorPosition(X * 4,Y*2);
 		cout<<"BM";
 		cout<<"BM";
 		setCursorPosition(X * 4,Y*2 + 1);
 		cout<<"BM";
 		cout<<"BM";
+		SetConsoleTextAttribute(hConsole, defCol);
 	}
 
 	bool Player::moveX(int dir) {	//ruch w prawo (dir = +1) lub w lewo (dir = -1)
@@ -65,9 +69,20 @@ public:
 		if(Map->map[X + dir][Y] != 0 || (X + dir >= (sizeX - 1) || X + dir <= 0)){
 			return false;
 		}else{
-			if(Map->map[X][Y]==0) cls(X,Y);
-			X += dir;
-			show();
+			if(Map -> map[X][Y] >= 30 && Map -> map[X][Y] <= 39){		// czy stoi na bombie
+				X += dir;
+				Map -> map[X][Y] = 101;
+				show();
+			}else{
+				if(Map -> map[X][Y] == 101 || Map -> map[X][Y] == 0) cls(X,Y);
+				Map -> map[X][Y] = 0;
+				X += dir;
+				Map -> map[X][Y] = 101;
+				show();
+			}
+			
+			
+			
 			return true;
 		}
 	
@@ -79,8 +94,10 @@ public:
 		if(Map->map[X][Y + dir] != 0 || (Y + dir >= (sizeY - 1) || Y + dir <= 0)){
 			return false;
 		}else{
-			if(Map->map[X][Y]==0) cls(X,Y);
+			if(Map -> map[X][Y] == 101 || Map -> map[X][Y] == 0) cls(X,Y);
+			Map -> map[X][Y] = 0;
 			Y += dir;
+			Map -> map[X][Y] = 101;
 			show();
 			return true;
 		}
