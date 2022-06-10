@@ -50,6 +50,16 @@ void showCursor() {		//poka� kursor
 	SetConsoleCursorInfo(consoleHandle, &info);
 }
 
+int getWinCols(){
+
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+    int columns;
+
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+    columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+    return columns;
+}
+
 void setConsoleSize() {      //ustawienie konsoli na pe�ny ekran oraz dopasowanie czcionki do ro�dzielczo�ci monitora
 
 	int W = GetSystemMetrics(SM_CXSCREEN); //pobranie szerokosci ekranu

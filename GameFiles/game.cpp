@@ -15,12 +15,12 @@ using namespace std;
 #include "functions_game.h"
 
 //klasya
-#include "Scoreboard.h"
 #include "GameMap.h"
 #include "Bomb.h"
 #include "Being.h"
-#include "Player.h"
 #include "Enemy.h"
+#include "Player.h"
+#include "Scoreboard.h"
 
 int main() {
     
@@ -42,7 +42,7 @@ int main() {
 
     Player p1("PlayerOne", &map1, &bombs);
     Player p2("PlayerTwo", &map1, &bombs, sizeX-2, sizeY-2);
-    Scoreboard scoreboard{};
+    Scoreboard scoreboard(&p1, &p2);
 
     map1.loadMap(0);
     map1.drawMap();
@@ -51,6 +51,7 @@ int main() {
     p2.show();
 
     scoreboard.setBorder();
+    scoreboard.show();
 
     int key{};
       
