@@ -15,6 +15,12 @@ private:
 public:
 
 	//konstruktor
+	Player(){
+		X=0;
+		Y=0;
+		name="";
+		
+	}
 	Player(string name, GameMap *map1, Bomb *bombs[]){
 		X=1;
 		Y=1;
@@ -37,6 +43,12 @@ public:
 	string getName(){
 		return name;
 	}
+	int getLifes(){
+		return lifes;
+	}
+	int getScore(){
+		return score;
+	}
 
 	//!SECTION
 
@@ -47,6 +59,7 @@ public:
 	bool moveY(int);
 	bool control(int, int, int, int, int, int);
 	bool plantBomb(int);
+	int minus1life();
 	
 	//!SECTION
 
@@ -150,6 +163,9 @@ public:
 	}
 
 	
-	
+	int Player::minus1life(){
+		lifes--;
+		return lifes;
+	}
 
 
