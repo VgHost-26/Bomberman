@@ -72,7 +72,7 @@ int main(){
             }
 
             if(selected==1){  //instrukcja
-                system("start howtoplay.cpp");
+                system("start howtoplay.exe");
                 return 0;
             }
 

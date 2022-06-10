@@ -37,6 +37,75 @@ void printBomob(){   //wyswietlanie kolorowej bomby w logo
     plik.close();  
 }
 
+void printIntro(double winWidth, double winHeight, int time, int step){   //wyswietlanie animacji intra   
+    
+    fstream plik;
+    string line{};
+    SetConsoleTextAttribute(hConsole, defCol);
+
+    double up_position=0;
+    double up_move=0, left_move=0;
+    
+    bool cero=true, uno=true ,dos=false;
+
+    while (cero) {
+        plik.open("intro.txt");
+
+        for(int i=0;i<94;i++) {
+
+            getline(plik,line);
+
+            if(line!=" ") {
+                setCursorPosition((winWidth-left_move),((winHeight/2.0-(4.0+up_move))+up_position));
+                cout<<line<<endl;
+                up_position++;
+            }
+            else {
+                up_position=0; // to jest po to żeby linie tekstu sie wyswietlały pod sobą
+                
+                if (left_move<=90) {
+                    up_move+=0.5;
+                    left_move+=step;  //ile klatek zmiesci sie w animacji (mniej = wiecej klatek)
+                    } else {
+                        uno=false; dos=true;
+                    }
+
+                if (uno)  Sleep(time); //przerwa czasowa miedzy klatkami
+
+                else if (dos) {
+                    Sleep(time*8);
+                    dos=false;
+                }
+                system("cls");
+            }
+        }
+        plik.close();
+
+        if (uno==false & dos==false) cero=false;
+    }  
+
+    plik.open("intro2.txt");
+
+    for (int i=0; i<44; i++) {
+        SetConsoleTextAttribute(hConsole, _Orange);
+        getline(plik,line);
+
+        if(line!=" ") {
+            setCursorPosition((winWidth-left_move),((winHeight/2.0-(4.0+up_move))+up_position));
+            cout<<line<<endl;
+            up_position++;
+        }
+        else {
+            if (i==43) Sleep(time*5);
+            up_position=0;
+            Sleep(time*2);
+            system("cls");
+        }
+    }
+
+    plik.close();
+}
+
 int middleCalc(int winWidth, int objWidth){     //obliczanie miejsca na środku ekranu dla konkretnego elementu wzgledem szerokości ekranu
     return winWidth-((winWidth-objWidth)/2);
 }

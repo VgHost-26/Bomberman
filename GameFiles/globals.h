@@ -39,6 +39,7 @@ const int _LightGrey = 2;
 //const int _Blue = 00;
 const int _Yellow = 12;
 const int _Orange = 13;
+const int _Red = 14;
 
 /*
     free space: 0
