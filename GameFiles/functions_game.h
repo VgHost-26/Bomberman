@@ -12,7 +12,7 @@ void cls(int x, int y){		//wyczyszcza jeden wybrany pixel na mapie
 
 string int2string(int x){
 	string str{}, strTmp{};
-	while(x>0){
+	while(x > 0){
 		strTmp = x % 10 + 48;
 		x /= 10;
 		str = strTmp + str;
