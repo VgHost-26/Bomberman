@@ -5,7 +5,7 @@ class Scoreboard {
     friend class GameMap;
 
 private:
-	float time = 133; //sekund
+	float time = 120; //sekund
 	int width;
 	Player p1{}, p2{};
 
