@@ -18,7 +18,7 @@ void setColors() {      //ustawienie domyslnej palety kolor�w dla ca�ej gry
 	GetConsoleScreenBufferInfoEx(hConsole, &info);
 
 	//ANCHOR[id=color-list] color_list
-	info.ColorTable[1] =  RGB(204, 204, 204);   //default grey
+	info.ColorTable[1] =  RGB(204, 204, 204);   //default grey / defCol
 	info.ColorTable[2] =  RGB(110, 110, 110);   //light grey
 	info.ColorTable[3] =  RGB(0, 0, 0);   //
 	info.ColorTable[4] =  RGB(0, 0, 0);   //
@@ -30,7 +30,7 @@ void setColors() {      //ustawienie domyslnej palety kolor�w dla ca�ej gry
 	info.ColorTable[10] = RGB(0, 250, 60);   //green
 	info.ColorTable[12] = RGB(255, 255, 0);   //yellow
 	info.ColorTable[13] = RGB(255,153,51);   //orange
-	info.ColorTable[14] = RGB(255, 0, 0);   //red
+	info.ColorTable[14] = RGB(255, 40, 0);   //red
 
 	SetConsoleScreenBufferInfoEx(hConsole, &info);
 

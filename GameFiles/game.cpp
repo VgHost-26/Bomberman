@@ -14,7 +14,8 @@ using namespace std;
 #include "functions_system.h"
 #include "functions_game.h"
 
-//klasy
+//klasya
+#include "Scoreboard.h"
 #include "GameMap.h"
 #include "Bomb.h"
 #include "Being.h"
@@ -41,12 +42,15 @@ int main() {
 
     Player p1("PlayerOne", &map1, &bombs);
     Player p2("PlayerTwo", &map1, &bombs, sizeX-2, sizeY-2);
+    Scoreboard scoreboard{};
 
     map1.loadMap(0);
     map1.drawMap();
     
     p1.show();
     p2.show();
+
+    scoreboard.setBorder();
 
     int key{};
       

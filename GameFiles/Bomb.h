@@ -1,6 +1,7 @@
 #pragma once
 class Bomb{
     friend class GameMap;
+    friend class Player;
 
 private:
 
@@ -21,12 +22,13 @@ public:
     int getX();
     int getY();
     bool placeBomb(int,int,int);;
+    int explode(int, Player *player);
     int explode(int);
     void clearExplode();
     int countDown();
     void drawFire(int, int, int);
     bool isExist();
-    
+    void spread(bool &stop, int, int, int);
     
 };
 
@@ -101,7 +103,7 @@ bool Bomb::placeBomb(int x, int y, int type){
     setCursorPosition(x * 4,y * 2 + 1);
     cout<<char(92)<<"__/";
 
-    if(Map->map[x][y] == 0) Map->map[x][y] = type;
+    if(Map->map[x][y] == 0 || Map->map[x][y] == 101) Map->map[x][y] = type;
 
 
     timer=25;
@@ -115,6 +117,22 @@ bool Bomb::placeBomb(int x, int y, int type){
     return false;
 }
 
+void Bomb::spread(bool &stop, int ix, int iy, int t){
+     if(!stop){
+                if(Map->map[x + ix][y + iy] == 0){
+                    drawFire(x + ix, y + iy, t);
+
+                }else if(Map->map[x + ix][y + iy] == 1){
+                    stop = true;
+
+                }else if(Map->map[x + ix][y + iy] >= 2 && Map->map[x + ix][y + iy] <= 9){
+                    stop = true;
+                    drawFire(x + ix, y + iy, t);
+                }
+            }
+
+} 
+
 int Bomb::explode(int t){
 
     if(x >= 0 || y >= 0){ 
@@ -127,6 +145,12 @@ int Bomb::explode(int t){
 
         for(int i = 0; i < expSize; i++){
 
+            spread(stopXP, i,      0, t);
+            spread(stopXL, i * -1, 0, t);
+            spread(stopYP, 0,      i, t);
+            spread(stopYL, 0, -1 * i, t);
+
+/*
             if(!stopXP){
                 if(Map->map[x+i][y] == 0){
                     drawFire(x + i, y, t);
@@ -175,7 +199,7 @@ int Bomb::explode(int t){
                     drawFire(x, y - i, t);
                 }
             }
-            
+            */
         }
       
     }
