@@ -16,10 +16,10 @@ using namespace std;
 
 //klasya
 #include "GameMap.h"
-#include "Bomb.h"
 #include "Being.h"
 #include "Enemy.h"
 #include "Player.h"
+#include "Bomb.h"
 #include "Scoreboard.h"
 
 int main() {
@@ -31,18 +31,23 @@ int main() {
     GameMap map1{};
 
     //Tworzenie tablicy bomb
-    Bomb *bombs = new Bomb[_bombsSize];
+    Bomb *bombs_1 = new Bomb[_bombsSize];
     for(int i = 0; i < _bombsSize; i++){
-        bombs[i] = Bomb(&map1);
+        bombs_1[i] = Bomb(&map1);
     }
+    Bomb *bombs_2 = new Bomb[_bombsSize];
+    for(int i = 0; i < _bombsSize; i++){
+        bombs_2[i] = Bomb(&map1);
+    }
+
 
     //Tworzenie tabl`icy wrogow
     Enemy *enemies = new Enemy[_EnemiesCount];
     
 
-    Player p1("PlayerOne", &map1, &bombs);
-    Player p2("PlayerTwo", &map1, &bombs, sizeX-2, sizeY-2);
-    Scoreboard scoreboard(&p1, &p2);
+    Player p1("PlayerOne", &map1/*, &bombs_1*/);
+    Player p2("PlayerTwo", &map1/*, &bombs_2*/, sizeX-2, sizeY-2);
+    Scoreboard scoreboard{};
 
     map1.loadMap(0);
     map1.drawMap();
@@ -51,7 +56,7 @@ int main() {
     p2.show();
 
     scoreboard.setBorder();
-    scoreboard.show();
+    scoreboard.show(&p1, &p2);
 
     int key{};
     int FakeTimer=0;
@@ -59,8 +64,22 @@ int main() {
 
 
         key = getKey();    
-        p1.control(_W, _A, _S, _D, _SPACE_BAR, key);
-        p2.control(_NUM_UP, _NUM_LEFT, _NUM_BOT, _NUM_RIGHT, _NUM_ZERO, key); 
+        if(p1.control(_W, _A, _S, _D, _SPACE_BAR, key) == 6){
+            for(int i = 0; i < _bombsSize; i++){
+                if(!bombs_1[i].isExist()){
+                    bombs_1[i].placeBomb(p1.getX(), p1.getY(),30);	//30 - typ bomby
+                    break;
+                } 
+		    }
+        }
+        if(p2.control(_NUM_UP, _NUM_LEFT, _NUM_BOT, _NUM_RIGHT, _NUM_ZERO, key) == 6){
+            for(int i = 0; i < _bombsSize; i++){
+                if(!bombs_2[i].isExist()){
+                    bombs_2[i].placeBomb(p2.getX(), p2.getY(),30);	//30 - typ bomby
+                    break;
+                } 
+		    }
+        }
 
         
         
@@ -69,24 +88,33 @@ int main() {
       // cout<<_getch()<<endl;
 
         for(int i=0;i<_bombsSize;i++){
-            if(bombs[i].countDown() == 0){
-                map1.map[bombs[i].getX()][bombs[i].getY()] = 0;
+            if(bombs_1[i].countDown(&p1, &p2) == 0){
+                map1.map[bombs_1[i].getX()][bombs_1[i].getY()] = 0;
+              
+            }
+            if(bombs_2[i].countDown(&p1, &p2) == 0){
+                map1.map[bombs_2[i].getX()][bombs_2[i].getY()] = 0;
               
             }
             
-            
         }
         
-        scoreboard.update();
+        scoreboard.update(&p1, &p2);
         
         Sleep(100);
-        
+        FakeTimer++;
+        if(FakeTimer % 10 == 0){
+            FakeTimer = 0;
+            p1.hitted = false;
+            p2.hitted = false;
+        }
     }
 
     setCursorPosition(100,50);
    // system("pause");
 
-    delete [] bombs;
+    delete [] bombs_1;
+    delete [] bombs_2;
     delete [] enemies;
 
     return 0;

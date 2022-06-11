@@ -1,18 +1,22 @@
 #pragma once
+
 class Player : public Being{
 	friend class GameMap;
 	friend class Bomb;
 private:
 
+
+
 	string name{};
 	int lifes = 3;
 	int score = 0;
 	int color = 1;
-	Bomb *bombs = new Bomb[6];
+	//Bomb *bombs = new Bomb[6];
 
 
 
 public:
+	bool hitted = false;
 
 	//konstruktor
 	Player(){
@@ -21,20 +25,20 @@ public:
 		name="";
 		
 	}
-	Player(string name, GameMap *map1, Bomb *bombs[]){
+	Player(string name, GameMap *map1/*, Bomb *bombs[]*/){
 		X=1;
 		Y=1;
 		this->name=name;
 		Map = map1;
-		this->bombs = *bombs;
+		//this->bombs = *bombs;
 
 	}
-	Player(string name, GameMap *map1, Bomb *bombs[], int x, int y){
+	Player(string name, GameMap *map1/*, Bomb *bombs[]*/, int x, int y){
 		X=x;
 		Y=y;
 		this->name=name;
 		Map = map1;
-		this->bombs = *bombs;
+	//	this->bombs = *bombs;
 
 	}
 
@@ -57,9 +61,10 @@ public:
 	void show();
 	bool moveX(int);
 	bool moveY(int);
-	bool control(int, int, int, int, int, int);
+	int control(int, int, int, int, int, int);
 	bool plantBomb(int);
 	int minus1life();
+	bool isAlive();
 	
 	//!SECTION
 
@@ -116,7 +121,7 @@ public:
 		}
 		return false;
 	}
-	bool Player::control(int w, int a, int s, int d, int bombKey, int key){		// funkcja do poruszania si© //skˆadowe: klawisz w g¢re, lewo, d¢ˆ, prawo, funkcja do pobierania klawiszy
+	int Player::control(int w, int a, int s, int d, int bombKey, int key){		// funkcja do poruszania si© //skˆadowe: klawisz w g¢re, lewo, d¢ˆ, prawo, funkcja do pobierania klawiszy
 		
 		
 
@@ -133,7 +138,8 @@ public:
 			return moveX(1);
 
 		}else if(key == bombKey){
-			return plantBomb(10);
+			return 6;
+			//return plantBomb(10);
 		}else{
 			return 0;
 		}
@@ -145,18 +151,12 @@ public:
 		
 		
 
-		for(int i = 0; i < _bombsSize; i++){
-			if(!bombs[i].isExist()){
-
-
-				//if(Map->map[X][Y] == 0) Map->map[X][Y] = type;
-
-				
-
-				bombs[i].placeBomb(X,Y,30);	//30 - typ bomby
-				break;
-			} 
-		}
+		// for(int i = 0; i < _bombsSize; i++){
+		// 	if(!bombs[i].isExist()){
+		// 		bombs[i].placeBomb(X,Y,30);	//30 - typ bomby
+		// 		break;
+		// 	} 
+		// }
 
 		
 		return false;
@@ -166,6 +166,11 @@ public:
 	int Player::minus1life(){
 		lifes--;
 		return lifes;
+	}
+	bool Player::isAlive(){
+		if(lifes > 0) return true;
+
+		return false;
 	}
 
 

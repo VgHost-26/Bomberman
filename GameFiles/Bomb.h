@@ -23,12 +23,12 @@ public:
     int getY();
     bool placeBomb(int,int,int);;
     int explode(int, Player *player);
-    int explode(int);
+    int explode(int, Player *p1, Player *p2);
     void clearExplode();
-    int countDown();
+    int countDown(Player *p1, Player *p2);
     void drawFire(int, int, int);
     bool isExist();
-    void spread(bool &stop, int, int, int);
+    void spread(bool &stop, int, int, int, Player *p1, Player *p2);
     
 };
 
@@ -78,7 +78,7 @@ int Bomb::getY(){
 }
 
 
-int Bomb::countDown(){
+int Bomb::countDown(Player *p1, Player *p2){
     if(timer < 0) return -1;
 
     timer--;
@@ -87,7 +87,7 @@ int Bomb::countDown(){
         clearExplode();
         return 0;
     }else if(timer <= 5){
-        explode(timer);
+        explode(timer, p1, p2);
         return timer;
         
     }else{
@@ -117,7 +117,7 @@ bool Bomb::placeBomb(int x, int y, int type){
     return false;
 }
 
-void Bomb::spread(bool &stop, int ix, int iy, int t){
+void Bomb::spread(bool &stop, int ix, int iy, int t, Player *p1, Player *p2){
      if(!stop){
                 if(Map->map[x + ix][y + iy] == 0){
                     drawFire(x + ix, y + iy, t);
@@ -129,15 +129,31 @@ void Bomb::spread(bool &stop, int ix, int iy, int t){
                     stop = true;
                     drawFire(x + ix, y + iy, t);
                 }
+                if(x + ix == p1->getX()  &&  y + iy == p1->getY()){
+                   
+                    if(!p1->hitted){
+                        p1->minus1life();
+                        p1->hitted = true;  
+                          
+                    }
+                    
+                }
+                if(x + ix == p2->getX()  &&  y + iy == p2->getY()){
+                   
+                    if(!p2->hitted){
+                        p2->minus1life();
+                        p2->hitted = true;  
+                    }
+                   
+                }
             }
 
 } 
 
-int Bomb::explode(int t){
+int Bomb::explode(int t, Player *p1, Player *p2){
 
     if(x >= 0 || y >= 0){ 
         drawFire(x, y, t);
-
         bool stopXP = false;
         bool stopXL = false;
         bool stopYP = false;
@@ -145,10 +161,10 @@ int Bomb::explode(int t){
 
         for(int i = 0; i < expSize; i++){
 
-            spread(stopXP, i,      0, t);
-            spread(stopXL, i * -1, 0, t);
-            spread(stopYP, 0,      i, t);
-            spread(stopYL, 0, -1 * i, t);
+            spread(stopXP, i,      0, t, p1, p2);
+            spread(stopXL, i * -1, 0, t, p1, p2);
+            spread(stopYP, 0,      i, t, p1, p2);
+            spread(stopYL, 0, -1 * i, t, p1, p2);
 
 /*
             if(!stopXP){

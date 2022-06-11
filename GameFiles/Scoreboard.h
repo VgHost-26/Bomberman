@@ -7,45 +7,45 @@ class Scoreboard {
 private:
 	float time = 120; //sekund
 	int width;
-	Player p1{}, p2{};
+	//Player p1{}, p2{};
 
 public:
-    Scoreboard(Player *p1, Player *p2);
+    Scoreboard();
     void setBorder();
-    void show();
-    void update();
+    void show(Player *p1, Player *p2);
+    void update(Player *p1, Player *p2);
     void drawLine(int, int);
 
 
 };
 
-Scoreboard::Scoreboard(Player *p1, Player *p2){
+Scoreboard::Scoreboard(){
 
 	width = getWinCols() - (sizeX * 4);
-	this -> p1 = *p1;
-	this -> p2 = *p2;
+	//p1 = p1;
+	//p2 = p2;
 	
 }
 
-void Scoreboard::show(){
+void Scoreboard::show(Player *p1, Player *p2){
 
     setCursorPosition((sizeX * 4 ) + 1, 3);
 	cout << "Time left: " << secToTime(time);
 
     setCursorPosition((sizeX * 4 ) + 1, 7);
-    cout << p1.getName();
+    cout << p1->getName();
     setCursorPosition((sizeX * 4 ) + 1, 9);
-	cout << "Lifes: " << p1.getLifes();
+	cout << "Lifes: " << p1->getLifes();
     setCursorPosition((sizeX * 4 ) + 1, 11);
-	cout << "Score: " << p1.getScore();
+	cout << "Score: " << p1->getScore();
 	
 
 	setCursorPosition((sizeX * 4 ) + 1, 2 + sizeY);
-    cout << p2.getName();
+    cout << p2->getName();
     setCursorPosition((sizeX * 4 ) + 1, 4 + sizeY);
-	cout << "Lifes: " << p2.getLifes();
+	cout << "Lifes: " << p2->getLifes();
     setCursorPosition((sizeX * 4 ) + 1, 6 + sizeY);
-	cout << "Score: " << p2.getScore();
+	cout << "Score: " << p2->getScore();
     
 
 }
@@ -60,7 +60,7 @@ void Scoreboard::setBorder(){
     
 
 }
-void Scoreboard::update(){
+void Scoreboard::update(Player *p1, Player *p2){
 	time-=0.1;
 
 	if(time <= 30) changeColor(_Orange);
@@ -73,16 +73,16 @@ void Scoreboard::update(){
 	changeColor(_DefGrey);
 
     setCursorPosition((sizeX * 4 ) + 1 + 7, 9);
-	cout << p1.getLifes();
+	cout << p1->getLifes();
     setCursorPosition((sizeX * 4 ) + 1 + 7, 11);
-	cout << p1.getScore();
+	cout << p1->getScore();
 	
 
 	
     setCursorPosition((sizeX * 4 ) + 1 + 7, 4 + sizeY);
-	cout << p2.getLifes();
+	cout << p2->getLifes();
     setCursorPosition((sizeX * 4 ) + 1 + 7, 6 + sizeY);
-	cout << p2.getScore();
+	cout << p2->getScore();
    
     
 
