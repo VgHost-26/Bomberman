@@ -73,6 +73,7 @@ public:
 	bool plantBomb(int);
 	int minus1life();
 	bool isAlive();
+	void addScore(int);
 	
 	//!SECTION
 
@@ -192,6 +193,7 @@ public:
 	
 	int Player::minus1life(){
 		lifes--;
+		score -= _PlayerKillScoreAmount;
 		return lifes;
 	}
 	bool Player::isAlive(){
@@ -199,5 +201,7 @@ public:
 
 		return false;
 	}
-
+	void Player::addScore(int amount){
+		score += amount;
+	}
 

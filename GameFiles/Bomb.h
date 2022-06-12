@@ -24,11 +24,12 @@ public:
     bool placeBomb(int,int,int);;
     int explode(int, Player *player);
     int explode(int, Player *p1, Player *p2);
-    void clearExplode();
+    void clearExplode(Player *p1, Player *p2);
     int countDown(Player *p1, Player *p2);
     void drawFire(int, int, int);
     bool isExist();
-    void spread(bool &stop, int, int, int, Player *p1, Player *p2);
+    int spread(bool &stop, int, int, int, Player *p1, Player *p2);
+    int CLSspread(bool &stop, int, int, int, Player *p1, Player *p2);
     
 };
 
@@ -84,7 +85,7 @@ int Bomb::countDown(Player *p1, Player *p2){
     timer--;
 
     if(timer <= 0){
-        clearExplode();
+        clearExplode(p1, p2);
         return 0;
     }else if(timer <= 5){
         explode(timer, p1, p2);
@@ -117,40 +118,74 @@ bool Bomb::placeBomb(int x, int y, int type){
     return false;
 }
 
-void Bomb::spread(bool &stop, int ix, int iy, int t, Player *p1, Player *p2){
-     if(!stop){
-                if(Map->map[x + ix][y + iy] == 0){
-                    drawFire(x + ix, y + iy, t);
+int Bomb::spread(bool &stop, int ix, int iy, int t, Player *p1, Player *p2){
+    int score=0;
+    if(!stop){
+        if(Map->map[x + ix][y + iy] == 0){
+            drawFire(x + ix, y + iy, t);
 
-                }else if(Map->map[x + ix][y + iy] == 1 || Map->map[x + ix][y + iy] == 5){
-                    stop = true;
+        }else if(Map->map[x + ix][y + iy] == 1 || Map->map[x + ix][y + iy] == 5){
+            stop = true;
+            
 
-                }else if(Map->map[x + ix][y + iy] >= 2 && Map->map[x + ix][y + iy] <= 9){
-                    stop = true;
-                    drawFire(x + ix, y + iy, t);
-                }
-                if(x + ix == p1->getX()  &&  y + iy == p1->getY()){
-                   
-                    if(!p1->hitted){
-                        p1->minus1life();
-                        p1->hitted = true;  
-                          
-                    }
+        }else if(Map->map[x + ix][y + iy] >= 2 && Map->map[x + ix][y + iy] <= 9){
+            stop = true;
+            //Map->map[x + ix][y + iy] = Map->map[x + ix][y + iy]* -1;
+            drawFire(x + ix, y + iy, t);
+          //  if((t* -1) % 5 == 0) score += _WallDestroyed;
+        }
+        if(x + ix == p1->getX()  &&  y + iy == p1->getY()){
+            
+            if(!p1->hitted){
+                p1->minus1life();
+                score -= (_PlayerKillScoreAmount * 0.5);    
+                p1->hitted = true;  
                     
-                }
-                if(x + ix == p2->getX()  &&  y + iy == p2->getY()){
-                   
-                    if(!p2->hitted){
-                        p2->minus1life();
-                        p2->hitted = true;  
-                    }
-                   
-                }
             }
+            
+        }
+        if(x + ix == p2->getX()  &&  y + iy == p2->getY()){
+            
+            if(!p2->hitted){
+                p2->minus1life();
+                //if(p1->hitted) score += (_PlayerKillScoreAmount * 0.5);  //wyrownanie w przypadku samobojstwa z zabojstwem
+                score += _PlayerKillScoreAmount;
+                p2->hitted = true;  
+            }
+            
+        }
+    }
+    return score;
 
 } 
 
-int Bomb::explode(int t, Player *p1, Player *p2){
+int Bomb::CLSspread(bool &stop, int ix, int iy, int t, Player *p1, Player *p2){
+    int score=0;
+    if(!stop){
+
+        
+
+
+        if(Map->map[x + ix][y + iy] == 0){
+            cls(x + ix, y + iy);
+
+        }else if(Map->map[x + ix][y + iy] == 1 || Map->map[x + ix][y + iy] == 5){
+            stop= true;
+
+        }else if(Map->map[x + ix][y + iy] >= 2 && Map->map[x + ix][y + iy] <= 4){
+            stop = true;
+            Map->map[x + ix][y + iy] = 0;
+            score += _WallDestroyed;
+            cls(x + ix, y + iy);
+            
+        }
+            
+    }
+    return score;
+
+} 
+
+int Bomb::explode(int t, Player *p1, Player *p2){   //time; owner; otherPlayer
 
     if(x >= 0 || y >= 0){ 
         drawFire(x, y, t);
@@ -161,61 +196,12 @@ int Bomb::explode(int t, Player *p1, Player *p2){
 
         for(int i = 0; i < expSize; i++){
 
-            spread(stopXP, i,      0, t, p1, p2);
-            spread(stopXL, i * -1, 0, t, p1, p2);
-            spread(stopYP, 0,      i, t, p1, p2);
-            spread(stopYL, 0, -1 * i, t, p1, p2);
+            p1 -> addScore(spread(stopXP, i,      0, t, p1, p2));
+            p1 -> addScore(spread(stopXL, i * -1, 0, t, p1, p2));
+            p1 -> addScore(spread(stopYP, 0,      i, t, p1, p2));
+            p1 -> addScore(spread(stopYL, 0, -1 * i, t, p1, p2));
 
-/*
-            if(!stopXP){
-                if(Map->map[x+i][y] == 0){
-                    drawFire(x + i, y, t);
 
-                }else if(Map->map[x+i][y] == 1){
-                    stopXP = true;
-
-                }else if(Map->map[x+i][y] >= 2 && Map->map[x+i][y] <= 9){
-                    stopXP = true;
-                    drawFire(x + i, y, t);
-                }
-            }
-            if(!stopXL){
-                if(Map->map[x-i][y] == 0){
-                    drawFire(x - i, y, t);
-
-                }else if(Map->map[x-i][y] == 1){
-                    stopXL = true;
-
-                }else if(Map->map[x-i][y] >= 2 && Map->map[x-i][y] <= 9){
-                    stopXL = true;
-                    drawFire(x - i, y, t);
-                }
-            }
-            if(!stopYP){
-                if(Map->map[x][y + i] == 0){
-                    drawFire(x, y + i, t);
-
-                }else if(Map->map[x][y + i] == 1){
-                    stopYP = true;
-
-                }else if(Map->map[x][y + i] >= 2 && Map->map[x][y + i] <= 9){
-                    stopYP = true;
-                    drawFire(x, y + i, t);
-                }
-            }
-            if(!stopYL){
-                if(Map->map[x][y - i] == 0){
-                    drawFire(x, y - i, t);
-
-                }else if(Map->map[x][y - i] == 1){
-                    stopYL = true;
-
-                }else if(Map->map[x][y - i] >= 2 && Map->map[x][y - i] <= 9){
-                    stopYL = true;
-                    drawFire(x, y - i, t);
-                }
-            }
-            */
         }
       
     }
@@ -223,7 +209,8 @@ int Bomb::explode(int t, Player *p1, Player *p2){
     return 0;
    
 }
-void Bomb::clearExplode(){
+
+void Bomb::clearExplode(Player *p1, Player *p2){
     if(x >= 0 || y >= 0){ 
 
         bool stopXP = false;
@@ -236,8 +223,13 @@ void Bomb::clearExplode(){
         cls(x, y);
 
         for(int i = 0; i < expSize; i++){
+       
+            p1 -> addScore(CLSspread(stopXP, i,      0, timer, p1, p2));
+            p1 -> addScore(CLSspread(stopXL, i * -1, 0, timer, p1, p2));
+            p1 -> addScore(CLSspread(stopYP, 0,      i, timer, p1, p2));
+            p1 -> addScore(CLSspread(stopYL, 0, -1 * i, timer, p1, p2));
 
-            if(!stopXP){
+/*            if(!stopXP){
                 if(Map->map[x+i][y] == 0){
                     cls(x + i, y);
 
@@ -289,7 +281,7 @@ void Bomb::clearExplode(){
                     if(Map->map[x][y - i] > 1 && Map->map[x][y - i] <= 9)Map->map[x][y - i] = 0;
                     cls(x, y - i);
                 }
-            }
+            }*/
         
         }
     }

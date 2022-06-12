@@ -63,4 +63,7 @@ const int _Border = 5;
 const int _EnemyBasic = 6;
 const int _EnemyFast = 7;
 
+//ANCHOR punktacja
+const int _WallDestroyed = 100;
+const int _PlayerKillScoreAmount = 500;
 

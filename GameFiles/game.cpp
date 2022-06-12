@@ -68,7 +68,7 @@ int main() {
         if(p1.control(_W, _A, _S, _D, _SPACE_BAR, key) == 6){
             for(int i = 0; i < _bombsSize; i++){
                 if(!bombs_1[i].isExist()){
-                    bombs_1[i].placeBomb(p1.getX(), p1.getY(),30);	//30 - typ bomby
+                    bombs_1[i].placeBomb(p1.getX(), p1.getY(), 30);	//30 - typ bomby
                     break;
                 } 
 		    }
@@ -76,7 +76,7 @@ int main() {
         if(p2.control(_NUM_UP, _NUM_LEFT, _NUM_BOT, _NUM_RIGHT, _NUM_ZERO, key) == 6){
             for(int i = 0; i < _bombsSize; i++){
                 if(!bombs_2[i].isExist()){
-                    bombs_2[i].placeBomb(p2.getX(), p2.getY(),30);	//30 - typ bomby
+                    bombs_2[i].placeBomb(p2.getX(), p2.getY(), 30);	//30 - typ bomby
                     break;
                 } 
 		    }
@@ -93,7 +93,7 @@ int main() {
                 map1.map[bombs_1[i].getX()][bombs_1[i].getY()] = 0;
               
             }
-            if(bombs_2[i].countDown(&p1, &p2) == 0){
+            if(bombs_2[i].countDown(&p2, &p1) == 0){
                 map1.map[bombs_2[i].getX()][bombs_2[i].getY()] = 0;
               
             }
