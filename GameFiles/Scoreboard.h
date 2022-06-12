@@ -32,6 +32,7 @@ void Scoreboard::show(Player *p1, Player *p2){
     setCursorPosition((sizeX * 4 ) + 1, 3);
 	cout << "Time left: " << secToTime(time);
 
+    changeColor(p1->getColor());
     setCursorPosition((sizeX * 4 ) + 1, 7);
     cout << p1->getName();
     setCursorPosition((sizeX * 4 ) + 1, 9);
@@ -40,6 +41,7 @@ void Scoreboard::show(Player *p1, Player *p2){
 	cout << "Score: " << p1->getScore();
 	
 
+    changeColor(p2->getColor());
 	setCursorPosition((sizeX * 4 ) + 1, 2 + sizeY);
     cout << p2->getName();
     setCursorPosition((sizeX * 4 ) + 1, 4 + sizeY);
@@ -50,6 +52,7 @@ void Scoreboard::show(Player *p1, Player *p2){
 
 }
 void Scoreboard::setBorder(){
+    changeColor(_DarkGrey);
 
     drawLine(2, 0);
     drawLine(1, 5);
@@ -57,6 +60,7 @@ void Scoreboard::setBorder(){
     drawLine(2, (sizeY * 2) - 2);
     
   //  for(int i =)
+    changeColor(_DefGrey);
     
 
 }

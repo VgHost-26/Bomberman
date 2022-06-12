@@ -122,7 +122,7 @@ void Bomb::spread(bool &stop, int ix, int iy, int t, Player *p1, Player *p2){
                 if(Map->map[x + ix][y + iy] == 0){
                     drawFire(x + ix, y + iy, t);
 
-                }else if(Map->map[x + ix][y + iy] == 1){
+                }else if(Map->map[x + ix][y + iy] == 1 || Map->map[x + ix][y + iy] == 5){
                     stop = true;
 
                 }else if(Map->map[x + ix][y + iy] >= 2 && Map->map[x + ix][y + iy] <= 9){
@@ -241,10 +241,10 @@ void Bomb::clearExplode(){
                 if(Map->map[x+i][y] == 0){
                     cls(x + i, y);
 
-                }else if(Map->map[x+i][y] == 1){
+                }else if(Map->map[x+i][y] == 1 || Map->map[x+i][y] == 5){
                     stopXP = true;
 
-                }else if(Map->map[x+i][y] >= 2 && Map->map[x+i][y] <= 9){
+                }else if(Map->map[x+i][y] >= 2 && Map->map[x+i][y] <= 4){
                     stopXP = true;
                     Map->map[x + i][y] = 0;
                     cls(x + i, y);
@@ -255,10 +255,10 @@ void Bomb::clearExplode(){
                 if(Map->map[x-i][y] == 0){
                     cls(x - i, y);
 
-                }else if(Map->map[x-i][y] == 1){
+                }else if(Map->map[x-i][y] == 1 || Map->map[x-i][y] == 5){
                     stopXL = true;
 
-                }else if(Map->map[x-i][y] >= 1 && Map->map[x-i][y] <= 9){
+                }else if(Map->map[x-i][y] >= 1 && Map->map[x-i][y] <= 4){
                     stopXL = true;
                     if(Map->map[x-i][y] > 1 && Map->map[x-i][y] <= 9) Map->map[x - i][y] = 0;
                     cls(x - i, y);
@@ -268,7 +268,7 @@ void Bomb::clearExplode(){
                 if(Map->map[x][y + i] == 0){
                     cls(x, y + i);
 
-                }else if(Map->map[x][y + i] == 1){
+                }else if(Map->map[x][y + i] == 1 || Map->map[x][y + i] == 5){
                     stopYP = true;
 
                 }else if(Map->map[x][y + i] >= 1 && Map->map[x][y + i] <= 9){
@@ -281,7 +281,7 @@ void Bomb::clearExplode(){
                 if(Map->map[x][y - i] == 0){
                     cls(x, y - i);
 
-                }else if(Map->map[x][y - i] == 1){
+                }else if(Map->map[x][y - i] == 1 || Map->map[x][y - i] == 5){
                     stopYL = true;
 
                 }else if(Map->map[x][y - i] >= 1 && Map->map[x][y - i] <= 9){

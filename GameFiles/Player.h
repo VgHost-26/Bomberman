@@ -11,8 +11,9 @@ private:
 	int lifes = 3;
 	int score = 0;
 	int color = 1;
-	//Bomb *bombs = new Bomb[6];
+	int *time;
 
+	//Bomb *bombs = new Bomb[6];
 
 
 public:
@@ -25,19 +26,23 @@ public:
 		name="";
 		
 	}
-	Player(string name, GameMap *map1/*, Bomb *bombs[]*/){
+	Player(string name, GameMap *map1, int color, int *t){
 		X=1;
 		Y=1;
 		this->name=name;
 		Map = map1;
+		this->color=color;
+		time = t;
 		//this->bombs = *bombs;
 
 	}
-	Player(string name, GameMap *map1/*, Bomb *bombs[]*/, int x, int y){
+	Player(string name, GameMap *map1, int color, int *t, int x, int y){
 		X=x;
 		Y=y;
 		this->name=name;
+		this->color=color;
 		Map = map1;
+		time = t;
 	//	this->bombs = *bombs;
 
 	}
@@ -52,6 +57,9 @@ public:
 	}
 	int getScore(){
 		return score;
+	}
+	int getColor(){
+		return color;
 	}
 
 	//!SECTION
@@ -71,15 +79,26 @@ public:
 
 };
 	void Player::show(){	//wy˜wietla gracza na mapie na jego aktualnej pozycji
+		if(Map->map[X][Y] < 30 || Map->map[X][Y] > 39){
+			if(hitted == true && *time % 2 == 0){
+			SetConsoleTextAttribute(hConsole, _Red);
+
+			}else if(hitted == true && *time % 2 == 1){
+				SetConsoleTextAttribute(hConsole, 0);
+
+			}else{
+				SetConsoleTextAttribute(hConsole, color);
+
+			}
+			setCursorPosition(X * 4,Y*2);
+			cout<<"BM";
+			cout<<"BM";
+			setCursorPosition(X * 4,Y*2 + 1);
+			cout<<"BM";
+			cout<<"BM";
+			SetConsoleTextAttribute(hConsole, defCol);
+		} 
 		
-		SetConsoleTextAttribute(hConsole, color);
-		setCursorPosition(X * 4,Y*2);
-		cout<<"BM";
-		cout<<"BM";
-		setCursorPosition(X * 4,Y*2 + 1);
-		cout<<"BM";
-		cout<<"BM";
-		SetConsoleTextAttribute(hConsole, defCol);
 	}
 
 	bool Player::moveX(int dir) {	//ruch w prawo (dir = +1) lub w lewo (dir = -1)
@@ -97,6 +116,7 @@ public:
 				X += dir;
 				Map -> map[X][Y] = 101;
 				show();
+				return true;
 			}
 			
 			
@@ -112,12 +132,19 @@ public:
 		if(Map->map[X][Y + dir] != 0 || (Y + dir >= (sizeY - 1) || Y + dir <= 0)){
 			return false;
 		}else{
-			if(Map -> map[X][Y] == 101 || Map -> map[X][Y] == 0) cls(X,Y);
-			Map -> map[X][Y] = 0;
-			Y += dir;
-			Map -> map[X][Y] = 101;
-			show();
-			return true;
+			if(Map -> map[X][Y] >= 30 && Map -> map[X][Y] <= 39){
+				Y += dir;
+				Map -> map[X][Y] = 101;
+				show();
+			
+			}else{
+				if(Map -> map[X][Y] == 101 || Map -> map[X][Y] == 0) cls(X,Y);
+				Map -> map[X][Y] = 0;
+				Y += dir;
+				Map -> map[X][Y] = 101;
+				show();
+				return true;
+			}
 		}
 		return false;
 	}
