@@ -44,9 +44,11 @@ int main() {
     //Tworzenie tabl`icy wrogow
     Enemy *enemies = new Enemy[_EnemiesCount];
     
+    int FakeTimer_1=1;
+    int FakeTimer_2=1;
 
-    Player p1("PlayerOne", &map1/*, &bombs_1*/);
-    Player p2("PlayerTwo", &map1/*, &bombs_2*/, sizeX-2, sizeY-2);
+    Player p1("PlayerOne", &map1, _Blue, &FakeTimer_1);
+    Player p2("PlayerTwo", &map1, _Pink, &FakeTimer_2, sizeX-2, sizeY-2);
     Scoreboard scoreboard{};
 
     map1.loadMap(0);
@@ -59,8 +61,7 @@ int main() {
     scoreboard.show(&p1, &p2);
 
     int key{};
-    int FakeTimer=0;
-    while(1){
+    while(p1.isAlive() && p2.isAlive()){
 
 
         key = getKey();    
@@ -99,13 +100,20 @@ int main() {
             
         }
         
+        p1.show();
+        p2.show();
         scoreboard.update(&p1, &p2);
-        
+
         Sleep(100);
-        FakeTimer++;
-        if(FakeTimer % 10 == 0){
-            FakeTimer = 0;
+        if(p1.hitted == true) FakeTimer_1++;
+        if(p2.hitted == true) FakeTimer_2++;
+        
+        if(FakeTimer_1 % 11 == 0){
+            FakeTimer_1 = 1;
             p1.hitted = false;
+        }
+        if(FakeTimer_2 % 11 == 0){
+            FakeTimer_2 = 1;
             p2.hitted = false;
         }
     }
