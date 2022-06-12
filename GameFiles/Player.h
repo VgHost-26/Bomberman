@@ -92,14 +92,15 @@ public:
 
 			}
 			setCursorPosition(X * 4,Y*2);
-			cout<<"BM";
-			cout<<"BM";
+			cout<<"}(";
+			cout<<"){";
 			setCursorPosition(X * 4,Y*2 + 1);
-			cout<<"BM";
-			cout<<"BM";
+			cout<<char(92)<<"'";
+			cout<<"'/";
 			SetConsoleTextAttribute(hConsole, defCol);
 		} 
 		
+
 	}
 
 	bool Player::moveX(int dir) {	//ruch w prawo (dir = +1) lub w lewo (dir = -1)
