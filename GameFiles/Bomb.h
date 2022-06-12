@@ -100,7 +100,7 @@ int Bomb::countDown(Player *p1, Player *p2){
 bool Bomb::placeBomb(int x, int y, int type){
 
     setCursorPosition(x * 4,y * 2);
-    cout<<"/  "<<char(92);
+    cout<<"/\"\""<<char(92);
     setCursorPosition(x * 4,y * 2 + 1);
     cout<<char(92)<<"__/";
 

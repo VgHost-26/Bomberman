@@ -79,12 +79,16 @@ void Scoreboard::update(Player *p1, Player *p2){
     setCursorPosition((sizeX * 4 ) + 1 + 7, 9);
 	cout << p1->getLifes();
     setCursorPosition((sizeX * 4 ) + 1 + 7, 11);
+    cout<<"          ";
+    setCursorPosition((sizeX * 4 ) + 1 + 7, 11);
 	cout << p1->getScore();
 	
 
 	
     setCursorPosition((sizeX * 4 ) + 1 + 7, 4 + sizeY);
 	cout << p2->getLifes();
+    setCursorPosition((sizeX * 4 ) + 1 + 7, 6 + sizeY);
+    cout<<"          ";
     setCursorPosition((sizeX * 4 ) + 1 + 7, 6 + sizeY);
 	cout << p2->getScore();
    
