@@ -6,6 +6,7 @@
 #include <windows.h>
 #include <conio.h>
 #include <ctime>
+#include <string>
 
 
 using namespace std;
@@ -47,8 +48,24 @@ int main() {
     int FakeTimer_1=1;
     int FakeTimer_2=1;
 
-    Player p1("PlayerOne", &map1, _Blue, &FakeTimer_1);
-    Player p2("PlayerTwo", &map1, _Pink, &FakeTimer_2, sizeX-2, sizeY-2);
+    string line, map_txt, p1_name="playerOne", p2_name="playerTwo";
+    int line2, p1_color=_Blue, p2_color=_Pink;
+
+    fstream game_session_config; // to jest fest na szybko i nie dziala do konca, jak bedzie ci sie chcialo martin mozesz napisac twoje
+    game_session_config.open("game_session_config.txt");
+    for (int i=0; i<4; i++) {
+        if (i==2 & i==4) game_session_config>>line2;
+        else getline(game_session_config,line);
+        if (i==0) map_txt=line;
+        if (i==1) p1_name=line;
+        if (i==2) p1_color=line2;
+        if (i==3) p2_name=line;
+        if (i==4) p2_color=line2;
+    }
+    game_session_config.close();
+
+    Player p1(p1_name, &map1, p1_color, &FakeTimer_1);
+    Player p2(p2_name, &map1, p2_color, &FakeTimer_2, sizeX-2, sizeY-2);
     Scoreboard scoreboard{};
 
     map1.loadMap(0);

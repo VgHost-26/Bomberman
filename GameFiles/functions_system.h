@@ -28,11 +28,11 @@ void setColors() {      //ustawienie domyslnej palety kolor�w dla ca�ej gry
 	info.ColorTable[2] =  RGB(110, 110, 110);   //light grey
 	info.ColorTable[3] =  RGB(50, 50, 70);   	//dark grey
 	info.ColorTable[4] =  RGB(0, 0, 0);   //
-	info.ColorTable[5] =  RGB(10, 50, 255);   //
 	info.ColorTable[6] =  RGB(0, 0, 0);   //
-	info.ColorTable[7] =  RGB(0, 0, 0);   //
+	info.ColorTable[5] =  RGB(30, 150, 50);  	//dark green
+	info.ColorTable[7] =  RGB(204, 204, 204);   //kolor na potrzeby poprawnego wyświetlania kolorów w kreatorze postaci
 	info.ColorTable[8] =  RGB(255, 50, 255);	//pink
-	info.ColorTable[9] =  RGB(30, 150, 50);  	//dark green
+	info.ColorTable[9] =  RGB(10, 50, 255);   //blue
 	info.ColorTable[10] = RGB(0, 250, 60);   	//green
 	info.ColorTable[12] = RGB(255, 255, 0);  	//yellow
 	info.ColorTable[13] = RGB(255,153,51);   	//orange

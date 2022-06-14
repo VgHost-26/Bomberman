@@ -6,7 +6,6 @@
 #include <windows.h>
 #include <conio.h>
 #include <ctime>
-#include <fstream>
 #include <string>
 
 using namespace std;
@@ -52,13 +51,6 @@ int main(){
     string playerSetList[2]={
         "   Nazwa   ",
         " <  ===  > "
-    };
-
-    string table[4]={
-        "�����������ͻ",    //top
-        "�           �",    //sides
-        "�����������͹",    //separator
-        "�����������ͼ",    //bottom
     };
 
     int selected{};
@@ -258,27 +250,27 @@ int main(){
                                                 cout.width(middle);
                                                 cout<<playerName;
 
-                                                selected=9;
+                                                selected=7;
                                                 while(1){         // wybieranie koloru
                                                     key_num=getKey();
                                                     if(key_num==75){              //Strza�ka w lewo
-                                                        if(selected>9){
+                                                        if(selected>7){
                                                             selected--;
                                                             cout.width(middle);
                                                             select(playerSetList, 2, 1, selected, selected, middleCalc(winWidth, 10));
 
-                                                            if(selected==9){
+                                                            if(selected==7){
                                                                 setCursorPosition(middleCalc(winWidth, -10),15+2);
                                                                 cout<<"  "; 
                                                             }
                                                         }
                                                     }else if(key_num==77){        //Strza�ka w prawo
-                                                        if(selected<13){
+                                                        if(selected<10){
                                                             selected++;
                                                             cout.width(middle);
                                                             select(playerSetList, 2, 1, selected, selected, middleCalc(winWidth, 10));
 
-                                                            if(selected==13){
+                                                            if(selected==10){
                                                                 setCursorPosition(middleCalc(winWidth, -10)+8,15+2);
                                                                 cout<<"  "; 
                                                             }
@@ -307,6 +299,116 @@ int main(){
                                         } else if (selected==1) {
                                             //==============================================================NICKNAME TEST MAPY
                                             for (int i=15; i<winHeight-5; i++) clearLine(winWidth/3, i, 40);
+                                            game_session_config.open("game_session_config.txt", ios::app);
+
+                                            playerSetList[0]="  Gracz 1  ";
+                                                
+                                            selected=1;
+                                            select(playerSetList, 2, 1, _DarkGrey, selected, middleCalc(winWidth, 10));
+                                            setCursorPosition(middleCalc(winWidth, -10),15+2);
+                                            cout<<"  ";
+                                            setCursorPosition(middleCalc(winWidth, -10)+8,15+2);
+                                            cout<<"  ";
+                                                                    // wybranie nazwy
+                                            while(!valid){          // walidacja nazwy
+                                                setCursorPosition(middleCalc(winWidth, -7),15);
+                                                showCursor();
+                                                // if(getKey()==27){
+                                                //     system("start menu.exe");
+                                                //     return 0;
+                                                // }
+                                                getline(cin,playerName);
+                                                
+                                                if(playerName.length()>8 || includeChar(playerName,';') || playerName.length()==0){
+                                                    clearLine(middleCalc(winWidth, -46), 12, 46);
+                                                    clearLine(middleCalc(winWidth, -46), 13, 46);
+                                                    setCursorPosition(middleCalc(winWidth, -46), 13);
+                                                    SetConsoleTextAttribute(hConsole,_Red);
+                                                    if(playerName.length()==0) cout<<"           ! Nazwa nie moze byc pusta !";
+                                                    if(playerName.length()>8) cout<<"! Nazwa powinna byc nie dluzsza niz 8 znakow !";
+                                                    if(playerName.length()>8 && includeChar(playerName,';')) setCursorPosition(middleCalc(winWidth, -46), 12); 
+                                                    if(includeChar(playerName,';')) cout<<"! Nazwa nie moze zawierac znaku srednika ';' !";
+                                                    SetConsoleTextAttribute(hConsole, defCol);
+                                                    
+                                                    clearLine(middleCalc(winWidth, -10), 15, playerName.length()+4);     //czyszczenie smieci po wpisaniu
+                                                    
+                                                    setCursorPosition(0,14);
+                                                    
+                                                    setCursorPosition(middleCalc(winWidth, -10),15);
+
+                                                    select(playerSetList, 2, 1, _DarkGrey, selected, middleCalc(winWidth, 10));
+                                                    setCursorPosition(middleCalc(winWidth, -10),15+2);
+                                                    cout<<"  ";
+                                                    setCursorPosition(middleCalc(winWidth, -10)+8,15+2);
+                                                    cout<<"  ";
+                                                    
+
+                                                }else{      //wszytskie dane podane prwidlowo
+                                                    valid=true;
+                                                    clearLine(middleCalc(winWidth, -46),12,46);
+                                                    clearLine(middleCalc(winWidth, -46),13,46);
+                                                }
+                                                
+                                            }
+                                            
+                                            //playerName=nameValidation(playerSetList,selected, alertCol, defCol)
+                                            valid=false;
+                                            
+                                            select(playerSetList, 2, 1, selected, selected, middleCalc(winWidth, 10));
+                                            setCursorPosition(middleCalc(winWidth, -10),15+2);
+                                            cout<<"  ";
+                                            
+
+                                            hideCursor();
+                                            playerSetList[0]=playerName;
+                                            playerNameTmp=playerName;
+                                            setCursorPosition(middleCalc(winWidth, -10),15);
+                                            cout<<"           ";
+                                            setCursorPosition(middleCalc(winWidth, -10),15);
+                                            int middle=(11/2)+(playerName.length()/2)+1;
+                                            cout.width(middle);
+                                            cout<<playerName;
+
+                                            selected=7;
+                                            while(1){         // wybieranie koloru
+                                                key_num=getKey();
+                                                if(key_num==75){              //Strza�ka w lewo
+                                                    if(selected>7){
+                                                        selected--;
+                                                        cout.width(middle);
+                                                        select(playerSetList, 2, 1, selected, selected, middleCalc(winWidth, 10));
+
+                                                        if(selected==7){
+                                                            setCursorPosition(middleCalc(winWidth, -10),15+2);
+                                                            cout<<"  "; 
+                                                        }
+                                                    }
+                                                }else if(key_num==77){        //Strza�ka w prawo
+                                                    if(selected<10){
+                                                        selected++;
+                                                        cout.width(middle);
+                                                        select(playerSetList, 2, 1, selected, selected, middleCalc(winWidth, 10));
+
+                                                        if(selected==10){
+                                                            setCursorPosition(middleCalc(winWidth, -10)+8,15+2);
+                                                            cout<<"  "; 
+                                                        }
+                                                    }
+                                                }else if(key_num==13){    //ENTER
+                                                
+                                                    clearLine(middleCalc(winWidth, -46),13,46);
+                                                    playerColor=selected;
+                                                    break;
+                                                    
+                                                }
+                                            }
+                                            game_session_config<<playerName<<endl<<playerColor<<endl;
+                                            
+                                        
+                                            
+                                            game_session_config.close();
+                                            //system("start game.exe");
+                                            return 0;
                                         }
                                     }
                                 }
