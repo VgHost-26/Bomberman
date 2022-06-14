@@ -187,3 +187,29 @@ bool confirm(int x, int y, int dCol, int sCol, bool border=0, string msg=""){ //
     }
     return 0;
 }
+
+void generateTable(string style[], int size, int place){    //tworzy tabelke na bazie przekazanego stylu
+    cout.width(place);
+    cout<<style[0]<<endl;
+    for(int i=0;i<size;i++){
+        cout.width(place);
+        cout<<style[1]<<endl;
+        if(i!=size-1){
+            cout.width(place);
+            cout<<style[2]<<endl;
+        }
+    }
+    cout.width(place);
+    cout<<style[3]<<endl;
+}
+
+bool includeChar(string st, char z){    //sprawdza czy "string st" zawiera znak "char z"
+
+    for(int i=0;i<st.length();i++){
+        if(st[i]==z){
+            return true;
+        }
+    }
+    return false;
+
+}
