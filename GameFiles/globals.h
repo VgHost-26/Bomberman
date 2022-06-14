@@ -33,14 +33,15 @@ const int _NUM_ZERO = 48;
 const int _ENTER = 13;
 
 //LINK Bomberman\GameFiles\functions_system.h#color-list
-const int defCol = 7;
-const int _DefGrey = 1;
-const int _LightGrey = 2;
-const int _Yellow = 12;
-const int _Orange = 13;
-const int _Red = 14;
-const int _Blue = 11;
+const int defCol    = 1;
+const int _DefGrey  = 1;
+const int _LightGrey= 2;
 const int _DarkGrey = 3;
+const int _Blue     = 5;
+const int _Pink     = 8;
+const int _Yellow   = 12;
+const int _Orange   = 13;
+const int _Red      = 14;
 
 /*
     free space: 0
@@ -56,9 +57,13 @@ const int _DarkGrey = 3;
 const int _SolidWall = 1;
 const int _SoftWall = 2;
 const int _SemiSolidWall = 3;
+const int _Border = 5;
 
 //ANCHOR enemies
 const int _EnemyBasic = 6;
 const int _EnemyFast = 7;
 
+//ANCHOR punktacja
+const int _WallDestroyed = 100;
+const int _PlayerKillScoreAmount = 500;
 

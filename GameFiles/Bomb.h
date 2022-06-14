@@ -1,6 +1,7 @@
 #pragma once
 class Bomb{
     friend class GameMap;
+    friend class Player;
 
 private:
 
@@ -21,12 +22,14 @@ public:
     int getX();
     int getY();
     bool placeBomb(int,int,int);;
-    int explode(int);
-    void clearExplode();
-    int countDown();
+    int explode(int, Player *player);
+    int explode(int, Player *p1, Player *p2);
+    void clearExplode(Player *p1, Player *p2);
+    int countDown(Player *p1, Player *p2);
     void drawFire(int, int, int);
     bool isExist();
-    
+    int spread(bool &stop, int, int, int, Player *p1, Player *p2);
+    int CLSspread(bool &stop, int, int, int, Player *p1, Player *p2);
     
 };
 
@@ -76,16 +79,16 @@ int Bomb::getY(){
 }
 
 
-int Bomb::countDown(){
+int Bomb::countDown(Player *p1, Player *p2){
     if(timer < 0) return -1;
 
     timer--;
 
     if(timer <= 0){
-        clearExplode();
+        clearExplode(p1, p2);
         return 0;
     }else if(timer <= 5){
-        explode(timer);
+        explode(timer, p1, p2);
         return timer;
         
     }else{
@@ -97,11 +100,11 @@ int Bomb::countDown(){
 bool Bomb::placeBomb(int x, int y, int type){
 
     setCursorPosition(x * 4,y * 2);
-    cout<<"/  "<<char(92);
+    cout<<"/\"\""<<char(92);
     setCursorPosition(x * 4,y * 2 + 1);
     cout<<char(92)<<"__/";
 
-    if(Map->map[x][y] == 0) Map->map[x][y] = type;
+    if(Map->map[x][y] == 0 || Map->map[x][y] == 101) Map->map[x][y] = type;
 
 
     timer=25;
@@ -115,11 +118,77 @@ bool Bomb::placeBomb(int x, int y, int type){
     return false;
 }
 
-int Bomb::explode(int t){
+int Bomb::spread(bool &stop, int ix, int iy, int t, Player *p1, Player *p2){
+    int score=0;
+    if(!stop){
+        if(Map->map[x + ix][y + iy] == 0){
+            drawFire(x + ix, y + iy, t);
+
+        }else if(Map->map[x + ix][y + iy] == 1 || Map->map[x + ix][y + iy] == 5){
+            stop = true;
+            
+
+        }else if(Map->map[x + ix][y + iy] >= 2 && Map->map[x + ix][y + iy] <= 9){
+            stop = true;
+            //Map->map[x + ix][y + iy] = Map->map[x + ix][y + iy]* -1;
+            drawFire(x + ix, y + iy, t);
+          //  if((t* -1) % 5 == 0) score += _WallDestroyed;
+        }
+        if(x + ix == p1->getX()  &&  y + iy == p1->getY()){
+            
+            if(!p1->hitted){
+                p1->minus1life();
+                score -= (_PlayerKillScoreAmount * 0.5);    
+                p1->hitted = true;  
+                    
+            }
+            
+        }
+        if(x + ix == p2->getX()  &&  y + iy == p2->getY()){
+            
+            if(!p2->hitted){
+                p2->minus1life();
+                //if(p1->hitted) score += (_PlayerKillScoreAmount * 0.5);  //wyrownanie w przypadku samobojstwa z zabojstwem
+                score += _PlayerKillScoreAmount;
+                p2->hitted = true;  
+            }
+            
+        }
+    }
+    return score;
+
+} 
+
+int Bomb::CLSspread(bool &stop, int ix, int iy, int t, Player *p1, Player *p2){
+    int score=0;
+    if(!stop){
+
+        
+
+
+        if(Map->map[x + ix][y + iy] == 0){
+            cls(x + ix, y + iy);
+
+        }else if(Map->map[x + ix][y + iy] == 1 || Map->map[x + ix][y + iy] == 5){
+            stop= true;
+
+        }else if(Map->map[x + ix][y + iy] >= 2 && Map->map[x + ix][y + iy] <= 4){
+            stop = true;
+            Map->map[x + ix][y + iy] = 0;
+            score += _WallDestroyed;
+            cls(x + ix, y + iy);
+            
+        }
+            
+    }
+    return score;
+
+} 
+
+int Bomb::explode(int t, Player *p1, Player *p2){   //time; owner; otherPlayer
 
     if(x >= 0 || y >= 0){ 
         drawFire(x, y, t);
-
         bool stopXP = false;
         bool stopXL = false;
         bool stopYP = false;
@@ -127,55 +196,12 @@ int Bomb::explode(int t){
 
         for(int i = 0; i < expSize; i++){
 
-            if(!stopXP){
-                if(Map->map[x+i][y] == 0){
-                    drawFire(x + i, y, t);
+            p1 -> addScore(spread(stopXP, i,      0, t, p1, p2));
+            p1 -> addScore(spread(stopXL, i * -1, 0, t, p1, p2));
+            p1 -> addScore(spread(stopYP, 0,      i, t, p1, p2));
+            p1 -> addScore(spread(stopYL, 0, -1 * i, t, p1, p2));
 
-                }else if(Map->map[x+i][y] == 1){
-                    stopXP = true;
 
-                }else if(Map->map[x+i][y] >= 2 && Map->map[x+i][y] <= 9){
-                    stopXP = true;
-                    drawFire(x + i, y, t);
-                }
-            }
-            if(!stopXL){
-                if(Map->map[x-i][y] == 0){
-                    drawFire(x - i, y, t);
-
-                }else if(Map->map[x-i][y] == 1){
-                    stopXL = true;
-
-                }else if(Map->map[x-i][y] >= 2 && Map->map[x-i][y] <= 9){
-                    stopXL = true;
-                    drawFire(x - i, y, t);
-                }
-            }
-            if(!stopYP){
-                if(Map->map[x][y + i] == 0){
-                    drawFire(x, y + i, t);
-
-                }else if(Map->map[x][y + i] == 1){
-                    stopYP = true;
-
-                }else if(Map->map[x][y + i] >= 2 && Map->map[x][y + i] <= 9){
-                    stopYP = true;
-                    drawFire(x, y + i, t);
-                }
-            }
-            if(!stopYL){
-                if(Map->map[x][y - i] == 0){
-                    drawFire(x, y - i, t);
-
-                }else if(Map->map[x][y - i] == 1){
-                    stopYL = true;
-
-                }else if(Map->map[x][y - i] >= 2 && Map->map[x][y - i] <= 9){
-                    stopYL = true;
-                    drawFire(x, y - i, t);
-                }
-            }
-            
         }
       
     }
@@ -183,7 +209,8 @@ int Bomb::explode(int t){
     return 0;
    
 }
-void Bomb::clearExplode(){
+
+void Bomb::clearExplode(Player *p1, Player *p2){
     if(x >= 0 || y >= 0){ 
 
         bool stopXP = false;
@@ -196,15 +223,20 @@ void Bomb::clearExplode(){
         cls(x, y);
 
         for(int i = 0; i < expSize; i++){
+       
+            p1 -> addScore(CLSspread(stopXP, i,      0, timer, p1, p2));
+            p1 -> addScore(CLSspread(stopXL, i * -1, 0, timer, p1, p2));
+            p1 -> addScore(CLSspread(stopYP, 0,      i, timer, p1, p2));
+            p1 -> addScore(CLSspread(stopYL, 0, -1 * i, timer, p1, p2));
 
-            if(!stopXP){
+/*            if(!stopXP){
                 if(Map->map[x+i][y] == 0){
                     cls(x + i, y);
 
-                }else if(Map->map[x+i][y] == 1){
+                }else if(Map->map[x+i][y] == 1 || Map->map[x+i][y] == 5){
                     stopXP = true;
 
-                }else if(Map->map[x+i][y] >= 2 && Map->map[x+i][y] <= 9){
+                }else if(Map->map[x+i][y] >= 2 && Map->map[x+i][y] <= 4){
                     stopXP = true;
                     Map->map[x + i][y] = 0;
                     cls(x + i, y);
@@ -215,10 +247,10 @@ void Bomb::clearExplode(){
                 if(Map->map[x-i][y] == 0){
                     cls(x - i, y);
 
-                }else if(Map->map[x-i][y] == 1){
+                }else if(Map->map[x-i][y] == 1 || Map->map[x-i][y] == 5){
                     stopXL = true;
 
-                }else if(Map->map[x-i][y] >= 1 && Map->map[x-i][y] <= 9){
+                }else if(Map->map[x-i][y] >= 1 && Map->map[x-i][y] <= 4){
                     stopXL = true;
                     if(Map->map[x-i][y] > 1 && Map->map[x-i][y] <= 9) Map->map[x - i][y] = 0;
                     cls(x - i, y);
@@ -228,7 +260,7 @@ void Bomb::clearExplode(){
                 if(Map->map[x][y + i] == 0){
                     cls(x, y + i);
 
-                }else if(Map->map[x][y + i] == 1){
+                }else if(Map->map[x][y + i] == 1 || Map->map[x][y + i] == 5){
                     stopYP = true;
 
                 }else if(Map->map[x][y + i] >= 1 && Map->map[x][y + i] <= 9){
@@ -241,7 +273,7 @@ void Bomb::clearExplode(){
                 if(Map->map[x][y - i] == 0){
                     cls(x, y - i);
 
-                }else if(Map->map[x][y - i] == 1){
+                }else if(Map->map[x][y - i] == 1 || Map->map[x][y - i] == 5){
                     stopYL = true;
 
                 }else if(Map->map[x][y - i] >= 1 && Map->map[x][y - i] <= 9){
@@ -249,7 +281,7 @@ void Bomb::clearExplode(){
                     if(Map->map[x][y - i] > 1 && Map->map[x][y - i] <= 9)Map->map[x][y - i] = 0;
                     cls(x, y - i);
                 }
-            }
+            }*/
         
         }
     }
