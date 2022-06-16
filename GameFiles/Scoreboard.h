@@ -65,7 +65,7 @@ void Scoreboard::setBorder(){
 
 }
 void Scoreboard::update(Player *p1, Player *p2){
-	time-=1;
+	time-=0.1;
 
 	if(time <= 30) changeColor(_Orange);
 	if(time <= 10) changeColor(_Red);
