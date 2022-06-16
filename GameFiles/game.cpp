@@ -49,7 +49,7 @@ int main() {
     int FakeTimer_2=1;
 
     string line, map_txt, p1_name="playerOne", p2_name="playerTwo";
-    int map_num{}, p1_color=_Blue, p2_color=_Pink;
+    int map_num{}, p1_color, p1_pozX, p1_pozY, p2_color, p2_pozX, p2_pozY;
     int tmp1{}, tmp2{};
     fstream game_session_config; // to jest fest na szybko i nie dziala do konca, jak bedzie ci sie chcialo martin mozesz napisac twoje
     game_session_config.open("game_session_config.txt");
@@ -66,12 +66,25 @@ int main() {
     game_session_config.close();
 
 
-    Player p1(p1_name, &map1, p1_color, &FakeTimer_1);
-    Player p2(p2_name, &map1, p2_color, &FakeTimer_2, sizeX-2, sizeY-2);
-    Scoreboard scoreboard{};
-
     map1.loadMap(map_num);
     map1.drawMap();
+
+    //wczytanie pozycji graczy dla konkretnej mapy
+    fstream plPozs;
+    plPozs.open("playersPositions.txt");
+    
+    plPozs>>p1_pozX>>p1_pozY;
+    plPozs>>p2_pozX>>p2_pozY;
+    
+    plPozs.close();
+
+
+
+    Player p1(p1_name, &map1, p1_color, &FakeTimer_1, p1_pozX, p1_pozY);
+    Player p2(p2_name, &map1, p2_color, &FakeTimer_2, p2_pozX, p2_pozY);
+    Scoreboard scoreboard{};
+
+   
     
     p1.show();
     p2.show();
