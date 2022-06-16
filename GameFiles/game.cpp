@@ -51,11 +51,12 @@ int main() {
     string line, map_txt, p1_name="playerOne", p2_name="playerTwo";
     int map_num{}, p1_color, p1_pozX, p1_pozY, p2_color, p2_pozX, p2_pozY;
     int tmp1{}, tmp2{};
-    fstream game_session_config; // to jest fest na szybko i nie dziala do konca, jak bedzie ci sie chcialo martin mozesz napisac twoje
+  
+    fstream game_session_config; 
     game_session_config.open("game_session_config.txt");
 
 
-    game_session_config>>map_num; //numeru mapy
+    game_session_config>>map_num; //pobranie numeru mapy
     getline(game_session_config, p1_name);  //przejscie do nowej lini
     getline(game_session_config, p1_name);  //pobranie nazwy gracza 1
     game_session_config>>p1_color; //pobieranie koloru gracza 1
@@ -79,7 +80,7 @@ int main() {
     plPozs.close();
 
 
-
+    //tworzenie graczy
     Player p1(p1_name, &map1, p1_color, &FakeTimer_1, p1_pozX, p1_pozY);
     Player p2(p2_name, &map1, p2_color, &FakeTimer_2, p2_pozX, p2_pozY);
     Scoreboard scoreboard{};
@@ -92,6 +93,8 @@ int main() {
     scoreboard.setBorder();
     scoreboard.show(&p1, &p2);
 
+
+    //---------GRA------------//
     int key{};
     while(p1.isAlive() && p2.isAlive() && !scoreboard.isTimeOver()){
 
@@ -148,8 +151,11 @@ int main() {
             p2.hitted = false;
         }
     }
+    //-------KONIEC-GRY------------//
+
     string message{};
     changeColor(_Red);
+
     //wiadomosc gdy skonczy sie czas
     if(scoreboard.isTimeOver())  coutWithBorder("Time is over", sizeX * 2, sizeY - 5);
     
@@ -213,7 +219,7 @@ int main() {
     delete [] bombs_2;
     delete [] enemies;
 
-    system("start menu.exe");
+    system("start menu.exe");   //powrot do menu
     return 0;
 
 }
