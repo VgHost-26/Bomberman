@@ -5,3 +5,6 @@
 *.pdb
 *.obj
 *.ilk
+
+GameFiles\game_session_config.txt
+GameFiles\playersPositions.txt
