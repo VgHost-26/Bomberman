@@ -1,5 +1,5 @@
-map_0.txt
-lolek
+0
+ala
+8
+makota
 9
-okok
-10

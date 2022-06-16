@@ -49,13 +49,14 @@ int main() {
     int FakeTimer_2=1;
 
     string line, map_txt, p1_name="playerOne", p2_name="playerTwo";
-    int p1_color=_Blue, p2_color=_Pink;
+    int map_num{}, p1_color=_Blue, p2_color=_Pink;
     int tmp1{}, tmp2{};
     fstream game_session_config; // to jest fest na szybko i nie dziala do konca, jak bedzie ci sie chcialo martin mozesz napisac twoje
     game_session_config.open("game_session_config.txt");
 
 
-    getline(game_session_config, map_txt);  //pobranie mapy
+    game_session_config>>map_num; //numeru mapy
+    getline(game_session_config, p1_name);  //przejscie do nowej lini
     getline(game_session_config, p1_name);  //pobranie nazwy gracza 1
     game_session_config>>p1_color; //pobieranie koloru gracza 1
     getline(game_session_config, p2_name);  //przejscie do nowej lini
@@ -69,7 +70,7 @@ int main() {
     Player p2(p2_name, &map1, p2_color, &FakeTimer_2, sizeX-2, sizeY-2);
     Scoreboard scoreboard{};
 
-    map1.loadMap(0);
+    map1.loadMap(map_num);
     map1.drawMap();
     
     p1.show();
@@ -140,7 +141,7 @@ int main() {
     if(scoreboard.isTimeOver())  coutWithBorder("Time is over", sizeX * 2, sizeY - 5);
     
     if(p1.getScore() > p2.getScore()){  //koniec czasu, gracz 1 ma wiecej punktow
-    
+
         message = p1.getName() + " " + "win!";
         changeColor(p1.getColor());
         coutWithBorder(message, sizeX * 2, sizeY -2);
