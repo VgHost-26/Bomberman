@@ -26,13 +26,21 @@ public:
 		mapName += ".txt";
 
 		fstream plik;
+		ofstream plikPozycje;
 		plik.open(mapName);
+		plikPozycje.open("playersPositions.txt");
+		string tmp;
 
 		for (int i = 0; i < sizeY; i++) {
 			for (int j = 0; j < sizeX; j++) {
 				plik >> map[j][i];
 			}
 		}
+		getline(plik, tmp);	//next line
+		getline(plik, tmp);
+		plikPozycje<<tmp<<endl;
+		getline(plik, tmp);
+		plikPozycje<<tmp<<endl;
 
 		plik.close();
 	}
