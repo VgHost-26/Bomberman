@@ -34,6 +34,7 @@ void setColors() {      //ustawienie domyslnej palety kolor�w dla ca�ej gry
 	info.ColorTable[8] =  RGB(255, 50, 255);	//pink
 	info.ColorTable[9] =  RGB(10, 50, 255);   	//blue
 	info.ColorTable[10] = RGB(0, 250, 60);   	//green
+	info.ColorTable[11] = RGB(255, 0, 145);   	//green
 	info.ColorTable[12] = RGB(255, 255, 0);  	//yellow
 	info.ColorTable[13] = RGB(255,153,51);   	//orange
 	info.ColorTable[14] = RGB(255, 40, 0);   	//red
