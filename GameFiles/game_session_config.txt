@@ -1,3 +1,5 @@
-map_0.txt
-player0
-8
+map_2.txt
+p1
+10
+p2
+9

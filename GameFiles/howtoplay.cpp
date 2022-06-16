@@ -23,4 +23,5 @@ int main(){
     setColors();
 
     cout<<"TEST"<<endl;
+    system("pause");
 }
