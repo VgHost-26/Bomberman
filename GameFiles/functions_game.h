@@ -49,3 +49,30 @@ string secToTime(int t){
 
 	return min + ":" + sec;
 }
+
+void coutWithBorder(string str, int x, int y, bool full = true){
+	
+	if(full){
+		setCursorPosition(x - (str.length()/2), y);
+		cout<<char(201);	// É
+		
+		for(int i=0; i < str.length() + 2; i++){
+			cout<<char(205);
+		}
+		cout<< char(187); 	// »
+	}
+
+	
+	
+	setCursorPosition(x - (str.length()/2), y+1);
+	cout<< char(186) << " " << str << " "<< char(186);
+	
+	setCursorPosition(x - (str.length()/2), y+2);
+	cout<< char(200); 	// ¼
+	for(int i=0; i < str.length() + 2; i++){
+		cout<<char(205);
+	}
+	cout<< char(188); 	// ¼
+
+}
+

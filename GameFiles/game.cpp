@@ -42,27 +42,28 @@ int main() {
     }
 
 
-    //Tworzenie tabl`icy wrogow
+    //Tworzenie tablicy wrogow
     Enemy *enemies = new Enemy[_EnemiesCount];
     
     int FakeTimer_1=1;
     int FakeTimer_2=1;
 
     string line, map_txt, p1_name="playerOne", p2_name="playerTwo";
-    int line2, p1_color=_Blue, p2_color=_Pink;
-
+    int p1_color=_Blue, p2_color=_Pink;
+    int tmp1{}, tmp2{};
     fstream game_session_config; // to jest fest na szybko i nie dziala do konca, jak bedzie ci sie chcialo martin mozesz napisac twoje
     game_session_config.open("game_session_config.txt");
-    for (int i=0; i<4; i++) {
-        if (i==2 & i==4) game_session_config>>line2;
-        else getline(game_session_config,line);
-        if (i==0) map_txt=line;
-        if (i==1) p1_name=line;
-        if (i==2) p1_color=line2;
-        if (i==3) p2_name=line;
-        if (i==4) p2_color=line2;
-    }
+
+
+    getline(game_session_config, map_txt);  //pobranie mapy
+    getline(game_session_config, p1_name);  //pobranie nazwy gracza 1
+    game_session_config>>p1_color; //pobieranie koloru gracza 1
+    getline(game_session_config, p2_name);  //przejscie do nowej lini
+    getline(game_session_config, p2_name);  //pobranie nazwy gracza 2
+    game_session_config>>p2_color;  //pobranie koloru gracza 2
+    
     game_session_config.close();
+
 
     Player p1(p1_name, &map1, p1_color, &FakeTimer_1);
     Player p2(p2_name, &map1, p2_color, &FakeTimer_2, sizeX-2, sizeY-2);
@@ -78,8 +79,7 @@ int main() {
     scoreboard.show(&p1, &p2);
 
     int key{};
-    while(p1.isAlive() && p2.isAlive()){
-
+    while(p1.isAlive() && p2.isAlive() && !scoreboard.isTimeOver()){
 
         key = getKey();    
         if(p1.control(_W, _A, _S, _D, _SPACE_BAR, key) == 6){
@@ -134,14 +134,72 @@ int main() {
             p2.hitted = false;
         }
     }
+    string message{};
+    changeColor(_Red);
+    //wiadomosc gdy skonczy sie czas
+    if(scoreboard.isTimeOver())  coutWithBorder("Time is over", sizeX * 2, sizeY - 5);
+    
+    if(p1.getScore() > p2.getScore()){  //koniec czasu, gracz 1 ma wiecej punktow
+    
+        message = p1.getName() + " " + "win!";
+        changeColor(p1.getColor());
+        coutWithBorder(message, sizeX * 2, sizeY -2);
 
-    setCursorPosition(100,50);
+    }else if(p2.getScore() > p1.getScore()){    //gracz 2 ma wiecej punktow
+
+        message = p2.getName() + " " + "win!";
+        changeColor(p2.getColor());
+        coutWithBorder(message, sizeX * 2, sizeY -2);
+
+    }else if(p1.getScore() == p2.getScore()){   //gdyby mieli tyle samo punktow
+
+        if(p1.getLifes() > p2.getLifes()){  //gracz 1 ma wiecej zyc
+            message = p1.getName() + " " + "win!";
+            changeColor(p1.getColor());
+            coutWithBorder(message, sizeX * 2, sizeY -2);
+
+        }else if(p2.getLifes() > p1.getLifes()){    //gracz 2 ma wiecej zyc
+
+            message = p2.getName() + " " + "win!";
+            changeColor(p2.getColor());
+            coutWithBorder(message, sizeX * 2, sizeY -2);
+
+        }else{
+            coutWithBorder("Its a draw!", sizeX * 2, sizeY -2); 
+        }
+    }
+
+    //wiadomosc gdy wygra gracz 2
+    changeColor(p2.getColor());
+    if(!p1.isAlive()){
+        message = p2.getName() + " " + "win!";
+        coutWithBorder(message, sizeX * 2, sizeY - 5);
+    }
+    //wiadomosc gdy wygra gracz 1
+    changeColor(p1.getColor());
+    if(!p2.isAlive()){
+        message = p1.getName() + " " + "win!";
+        coutWithBorder(message, sizeX * 2, sizeY - 5);
+    }
+
+    Sleep(1000);
+    changeColor(_Orange);
+    coutWithBorder(" Press any button ", sizeX * 2, sizeY +1);
+    coutWithBorder(" to return to menu", sizeX * 2, sizeY +2, false);
+    //coutWithBorder("to go back to menu", sizeX * 2, sizeY + 2);
+
+   _getch();
+   
+    
+
+
    // system("pause");
 
     delete [] bombs_1;
     delete [] bombs_2;
     delete [] enemies;
 
+    system("start menu.exe");
     return 0;
 
 }

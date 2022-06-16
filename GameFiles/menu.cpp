@@ -37,7 +37,7 @@ int main(){
 
     string mapList[4]={
         "  Kolumny",
-        " Labirynt",
+        "  Labirynt",
         "  Dust II",
         "  Powrot"
     };

@@ -15,7 +15,7 @@ public:
     void show(Player *p1, Player *p2);
     void update(Player *p1, Player *p2);
     void drawLine(int, int);
-
+    bool isTimeOver();
 
 };
 
@@ -65,12 +65,14 @@ void Scoreboard::setBorder(){
 
 }
 void Scoreboard::update(Player *p1, Player *p2){
-	time-=0.1;
+	time-=1;
 
 	if(time <= 30) changeColor(_Orange);
 	if(time <= 10) changeColor(_Red);
 
 
+    setCursorPosition((sizeX * 4 ) + 1 + 11, 3);
+    cout<<"          ";
     setCursorPosition((sizeX * 4 ) + 1 + 11, 3);
 	cout << secToTime(time);
 
@@ -105,4 +107,8 @@ void Scoreboard::drawLine(int w, int pozY){
             cout << char(219);
         }
     }
+}
+bool Scoreboard::isTimeOver(){
+    if(time <= 0) return true;
+    return false;
 }
