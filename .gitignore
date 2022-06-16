@@ -1,9 +1,9 @@
 .vscode
+
 *.db
 *.pdb
 *.obj
 *.ilk
-GameFiles/playersPositions.txt
-GameFiles/game_session_config.txt
-GameFiles/game_session_config.txt
-GameFiles/playersPositions.txt
+
+*playersPositions*
+*game_session_config*
