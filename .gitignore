@@ -6,4 +6,5 @@
 *.obj
 *.ilk
 
-game_session_config.txt
+GameFiles\game_session_config.txt
+GameFiles\playersPositions.txt
