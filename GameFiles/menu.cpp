@@ -127,7 +127,9 @@ int main(){
                             selected=0;
                         } else {
                             game_session_config.open("game_session_config.txt", ios::trunc);
-                            game_session_config<<"map_"<<selected<<".txt"<<endl; selected=0;
+                            //game_session_config<<"map_"<<selected<<".txt"<<endl; 
+                            game_session_config<<selected<<endl; 
+                            selected=0;d
                             game_session_config.close();
                             //============================================================================TRYB GRY
 
