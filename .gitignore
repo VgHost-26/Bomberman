@@ -5,3 +5,5 @@
 *.pdb
 *.obj
 *.ilk
+
+game_session_config.txt
