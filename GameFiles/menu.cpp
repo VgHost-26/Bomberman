@@ -242,6 +242,7 @@ int main(){
                                                 cout<<"  ";
                                                 
 
+                                                
                                                 hideCursor();
                                                 playerSetList[0]=playerName;
                                                 playerNameTmp=playerName;
@@ -250,29 +251,33 @@ int main(){
                                                 setCursorPosition(middleCalc(winWidth, -10),15);
                                                 int middle=(11/2)+(playerName.length()/2)+1;
                                                 cout.width(middle);
-                                                cout<<playerName;
 
-                                                selected=7;
+                                                changeColor(5);
+                                                cout<<playerName;
+                                                setCursorPosition(middleCalc(winWidth, -5), 17);
+                                                cout<<" ===  >";
+
+                                                selected=5;
                                                 while(1){         // wybieranie koloru
                                                     key_num=getKey();
                                                     if(key_num==75){              //Strza�ka w lewo
-                                                        if(selected>7){
+                                                        if(selected>5){
                                                             selected--;
                                                             cout.width(middle);
                                                             select(playerSetList, 2, 1, selected, selected, middleCalc(winWidth, 10));
 
-                                                            if(selected==7){
+                                                            if(selected==5){
                                                                 setCursorPosition(middleCalc(winWidth, -10),15+2);
                                                                 cout<<"  "; 
                                                             }
                                                         }
                                                     }else if(key_num==77){        //Strza�ka w prawo
-                                                        if(selected<10){
+                                                        if(selected<12){
                                                             selected++;
                                                             cout.width(middle);
                                                             select(playerSetList, 2, 1, selected, selected, middleCalc(winWidth, 10));
 
-                                                            if(selected==10){
+                                                            if(selected==12){
                                                                 setCursorPosition(middleCalc(winWidth, -10)+8,15+2);
                                                                 cout<<"  "; 
                                                             }
@@ -281,7 +286,7 @@ int main(){
                                                         if(i==1 && selected==playerColor){
                                                             clearLine(middleCalc(winWidth, -46),13,46);
                                                             setCursorPosition(middleCalc(winWidth, -28),13);
-                                                            SetConsoleTextAttribute(hConsole,_Red);
+                                                            SetConsoleTextAttribute(hConsole, _Red);
                                                             cout<<"! Ten kolor jest juz zajety !";
                                                         }else{
                                                             clearLine(middleCalc(winWidth, -46),13,46);
