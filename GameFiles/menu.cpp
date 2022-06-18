@@ -128,7 +128,7 @@ int main(){
                         } else {
                             game_session_config.open("game_session_config.txt", ios::trunc);
                             //game_session_config<<"map_"<<selected<<".txt"<<endl; 
-                            game_session_config<<selected<<endl; 
+                            game_session_config<<(selected+1)<<endl; 
                             selected=0;
                             game_session_config.close();
                             //============================================================================TRYB GRY
@@ -374,29 +374,34 @@ int main(){
                                             setCursorPosition(middleCalc(winWidth, -10),15);
                                             int middle=(11/2)+(playerName.length()/2)+1;
                                             cout.width(middle);
+                                            
+                                            
+                                            changeColor(5);
                                             cout<<playerName;
+                                            setCursorPosition(middleCalc(winWidth, -5), 17);
+                                            cout<<" ===  >";
 
                                             selected=7;
                                             while(1){         // wybieranie koloru
                                                 key_num=getKey();
                                                 if(key_num==75){              //Strza�ka w lewo
-                                                    if(selected>7){
+                                                    if(selected>5){
                                                         selected--;
                                                         cout.width(middle);
                                                         select(playerSetList, 2, 1, selected, selected, middleCalc(winWidth, 10));
 
-                                                        if(selected==7){
+                                                        if(selected==5){
                                                             setCursorPosition(middleCalc(winWidth, -10),15+2);
                                                             cout<<"  "; 
                                                         }
                                                     }
                                                 }else if(key_num==77){        //Strza�ka w prawo
-                                                    if(selected<10){
+                                                    if(selected<12){
                                                         selected++;
                                                         cout.width(middle);
                                                         select(playerSetList, 2, 1, selected, selected, middleCalc(winWidth, 10));
 
-                                                        if(selected==10){
+                                                        if(selected==12){
                                                             setCursorPosition(middleCalc(winWidth, -10)+8,15+2);
                                                             cout<<"  "; 
                                                         }
@@ -414,7 +419,7 @@ int main(){
                                         
                                             
                                             game_session_config.close();
-                                            //system("start game.exe");
+                                            system("start mapTesting.exe");
                                             return 0;
                                         }
                                     }

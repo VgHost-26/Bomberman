@@ -56,13 +56,13 @@ int main() {
     game_session_config.open("game_session_config.txt");
 
 
-    game_session_config>>map_num; //pobranie numeru mapy
+    game_session_config>>map_num;           //pobranie numeru mapy
     getline(game_session_config, p1_name);  //przejscie do nowej lini
     getline(game_session_config, p1_name);  //pobranie nazwy gracza 1
-    game_session_config>>p1_color; //pobieranie koloru gracza 1
+    game_session_config>>p1_color;          //pobieranie koloru gracza 1
     getline(game_session_config, p2_name);  //przejscie do nowej lini
     getline(game_session_config, p2_name);  //pobranie nazwy gracza 2
-    game_session_config>>p2_color;  //pobranie koloru gracza 2
+    game_session_config>>p2_color;          //pobranie koloru gracza 2
     
     game_session_config.close();
 
@@ -153,6 +153,11 @@ int main() {
     }
     //-------KONIEC-GRY------------//
 
+
+    //konwersja pozostałych żyć na punkty
+    p1.addScore(p1.getLifes() * 1000);
+    p2.addScore(p2.getLifes() * 1000);
+
     string message{};
     changeColor(_Red);
 
@@ -189,18 +194,18 @@ int main() {
         }
     }
 
-    //wiadomosc gdy wygra gracz 2
-    changeColor(p2.getColor());
+   /* //wiadomosc gdy wygra gracz 2
     if(!p1.isAlive()){
+        changeColor(p2.getColor());
         message = p2.getName() + " " + "win!";
         coutWithBorder(message, sizeX * 2, sizeY - 5);
     }
     //wiadomosc gdy wygra gracz 1
-    changeColor(p1.getColor());
     if(!p2.isAlive()){
+        changeColor(p1.getColor());
         message = p1.getName() + " " + "win!";
         coutWithBorder(message, sizeX * 2, sizeY - 5);
-    }
+    }*/
 
     Sleep(1000);
     changeColor(_Orange);

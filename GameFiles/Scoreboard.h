@@ -13,7 +13,9 @@ public:
     Scoreboard();
     void setBorder();
     void show(Player *p1, Player *p2);
+    void show(Player *p1);
     void update(Player *p1, Player *p2);
+    void update(Player *p1);
     void drawLine(int, int);
     bool isTimeOver();
 
@@ -25,6 +27,23 @@ Scoreboard::Scoreboard(){
 	//p1 = p1;
 	//p2 = p2;
 	
+}
+void Scoreboard::show(Player *p1){
+
+    setCursorPosition((sizeX * 4 ) + 1, 3);
+	cout << "Time left: " << "unlimited";
+
+    changeColor(p1->getColor());
+    setCursorPosition((sizeX * 4 ) + 1, 7);
+    cout << p1->getName();
+    setCursorPosition((sizeX * 4 ) + 1, 9);
+	cout << "Lifes: " << p1->getLifes();
+    setCursorPosition((sizeX * 4 ) + 1, 11);
+	cout << "Score: " << p1->getScore();
+	
+
+    
+
 }
 
 void Scoreboard::show(Player *p1, Player *p2){
@@ -51,6 +70,7 @@ void Scoreboard::show(Player *p1, Player *p2){
     
 
 }
+
 void Scoreboard::setBorder(){
     changeColor(_DarkGrey);
 
@@ -64,6 +84,24 @@ void Scoreboard::setBorder(){
     
 
 }
+void Scoreboard::update(Player *p1){
+
+
+	changeColor(_DefGrey);
+
+    setCursorPosition((sizeX * 4 ) + 1 + 7, 9);
+	cout << p1->getLifes();
+    setCursorPosition((sizeX * 4 ) + 1 + 7, 11);
+    cout<<"          ";
+    setCursorPosition((sizeX * 4 ) + 1 + 7, 11);
+	cout << p1->getScore();
+	
+
+
+    
+
+}
+
 void Scoreboard::update(Player *p1, Player *p2){
 	time-=0.1;
 
