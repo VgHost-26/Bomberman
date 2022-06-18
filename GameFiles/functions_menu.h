@@ -213,3 +213,12 @@ bool includeChar(string st, char z){    //sprawdza czy "string st" zawiera znak 
     return false;
 
 }
+
+void coutGoBack(){
+
+    int length = consoleScreenBufferInfo.dwMaximumWindowSize.Y;
+
+    setCursorPosition(getCursorPosition().X, length-2);
+
+    setCenter(36); cout<<"Kliknij dowolny klawisz, by wr¢ci†"<<endl;
+}

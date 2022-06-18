@@ -2,6 +2,7 @@
 #pragma once
 
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+CONSOLE_SCREEN_BUFFER_INFO consoleScreenBufferInfo{}; //zmienna przygotowana na wpisywanie informacje o buforze [konsoli]
 
 const int sizeX = 50 / 2;
 const int sizeY = 15;

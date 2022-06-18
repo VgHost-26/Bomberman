@@ -22,9 +22,10 @@ int main(){
     setConsoleSize();
     hideCursor();
     setColors();
+    hideScrollbars();
 
     //pobieranie wielko�ci konsoli (centrowanie)
-    CONSOLE_SCREEN_BUFFER_INFO csbi;    
+    CONSOLE_SCREEN_BUFFER_INFO csbi; //<a to az sie prosi zeby zrobic w globalsach
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
     int winWidth = csbi.dwMaximumWindowSize.X;
     int winHeight = csbi.dwMaximumWindowSize.Y;

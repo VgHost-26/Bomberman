@@ -1,0 +1,22 @@
+sterowanie P1: WSAD; bomba - Spacja
+sterowanie p2 strzaˆki [NumpadPad]; bomba - 0 [NumpadPad]
+
+punkty:
+zniszczenie ˜cianki +100
+trafienie przeciwnika +500
+trafienie samego siebie -750
+gdy trafi cie przeciwnik -500
+trafienie siebie ORAZ przeciwnika +250
+gdy skonczy sie czas ka¾de pozostale ¾ycie zamieniane jest na 1000 punkt¢w
+
+Û - niezniszczalne ˜ciany
+° - zniszczalne ˜ciany
+
+gra konczy sie gdy ktorys gracz straci wszystkei zycia lub wraz z uplywam czasu 
+na koniec gry podsumowywane sa wszystkie punkty i wygrywa gracz ktry uzyskal ich najwiecej 
+(no chyba ze robimy ze ten kto straci wszytskie zycia to ma insta loose nie zaleznie od ilosci punktow?)
+
+czas na gre 2min
+czas na gre w trybie tesowania map: nieograniczony
+
+//spokojnie to jeszcza tu zmienie xP

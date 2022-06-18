@@ -21,7 +21,20 @@ int main(){
     setConsoleSize();
     hideCursor();
     setColors();
+    hideScrollbars();
 
-    cout<<"TEST"<<endl;
-    system("pause");
+    cout<<"\n";
+    changeColor(_LightGrey);
+    setCenter(12); cout<<"Instruckja gry\n\n\n";
+
+    changeColor(_DefGrey);
+    writeFromFile("howtoplay.txt");
+
+    changeColor(_LightGrey);
+    coutGoBack();
+
+    pauza();
+
+    system("start menu.exe");   //powrot do menu
+    return 0;
 }

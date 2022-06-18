@@ -5,8 +5,8 @@
 #pragma comment(lib, "winmm.lib")
 #pragma warning(disable:4996)
 
-void setCursorPosition(int x, int y) {    //ustawinei pozycji kursora w konsoli
-	HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+void setCursorPosition(int x, int y) {    //ustawinie pozycji kursora w konsoli
+	HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE); //<mamy to juz w globalsach, Martin fixnij prosze kod
 	cout.flush();
 	COORD coord = { (SHORT)x, (SHORT)y };
 	SetConsoleCursorPosition(hOut, coord);
@@ -42,6 +42,7 @@ void setColors() {      //ustawienie domyslnej palety kolorï¿½w dla caï¿½ej gry
 	SetConsoleScreenBufferInfoEx(hConsole, &info);
 
 }
+
 void hideCursor() {		//ukrycie kursora
 	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO info;
@@ -49,6 +50,7 @@ void hideCursor() {		//ukrycie kursora
 	info.bVisible = FALSE;
 	SetConsoleCursorInfo(consoleHandle, &info);
 }
+
 void showCursor() {		//pokaï¿½ kursor
 	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO info;
@@ -106,4 +108,69 @@ int getKey() {		//pobranie klawisza z klawiatury
 		return _getch();
 	}
 	return 0;
+}
+
+/*gdzie sie znajduje aktualnie kursor [input]*/
+COORD getCursorPosition() {
+    if (GetConsoleScreenBufferInfo(hConsole, &consoleScreenBufferInfo)) {
+        return consoleScreenBufferInfo.dwCursorPosition;
+    }
+    else {
+        COORD cordy = {0, 0}; //fail
+        return cordy;
+    }
+}
+
+/*ukrycie scrolbara, moze sie pokazywac bo w setConsoleSize nie fixujemy bufora;
+dzialanie zalezne od domyslnych ustawien konlosi w systemie*/
+void hideScrollbars() {
+
+    GetConsoleScreenBufferInfo(hConsole, &consoleScreenBufferInfo);
+
+    COORD new_screen_buffer_size;
+
+    new_screen_buffer_size.X = consoleScreenBufferInfo.srWindow.Right - consoleScreenBufferInfo.srWindow.Left + 1; // kolumn
+    new_screen_buffer_size.Y = consoleScreenBufferInfo.srWindow.Bottom - consoleScreenBufferInfo.srWindow.Top + 1; // wierszy
+
+    SetConsoleScreenBufferSize(hConsole, new_screen_buffer_size);
+
+}
+
+/*centrowanie textu - wystarczy podac dlugosc textu; 
+czym wi©cej tym bardziej w lewo przesuni©te, jak co*/
+void setCenter(int length) {
+
+    GetConsoleScreenBufferInfo(hConsole, &consoleScreenBufferInfo);
+
+    int width = consoleScreenBufferInfo.dwMaximumWindowSize.X;
+
+    setCursorPosition((width / 2) - (length / 2), getCursorPosition().Y);
+}
+
+/*wycentrowany text z pliku*/
+void writeFromFile(string nazwa) {
+
+    ifstream plik;
+    plik.open(nazwa);
+    string str{};
+
+    if (plik.is_open()) {
+
+        while (!plik.eof()) {
+            getline(plik, str);
+            setCenter(str.length());
+            cout << str << endl;
+        }
+
+        plik.close();
+    }
+    else {
+        cout << "Bˆ¥d przy otwaciu pliku !" <<endl;
+    }
+
+}
+
+/*system("pause") bez komunikatu*/
+void pauza(){
+	system("pause > nul");
 }
