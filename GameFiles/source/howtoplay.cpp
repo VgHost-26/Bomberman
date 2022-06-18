@@ -35,6 +35,6 @@ int main(){
 
     pauza();
 
-    system("start menu.exe");   //powrot do menu
+    system("start menu.exe");
     return 0;
 }

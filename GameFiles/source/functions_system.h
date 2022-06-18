@@ -82,7 +82,7 @@ void setConsoleSize() {      //ustawienie konsoli na pe�ny ekran oraz dopasowa
 		res = W;
 	}
 
-    SendMessage(GetConsoleWindow(), WM_SYSKEYDOWN, VK_RETURN, 0x20000000); //ALT+ENTER
+    SendMessage(GetConsoleWindow(), WM_SYSKEYDOWN, VK_RETURN, 0x20000000); //'ALT + ENTER'
 	SetConsoleDisplayMode(GetStdHandle(STD_OUTPUT_HANDLE), CONSOLE_FULLSCREEN_MODE, 0); //pelny ekran
 	// system("mode 650");
 	// system("mode con COLS=700");
@@ -147,7 +147,7 @@ void setCenter(int length) {
     setCursorPosition((width / 2) - (length / 2), getCursorPosition().Y);
 }
 
-/*wycentrowany text z pliku*/
+/*wypisanie textu z pliku - wycentrowany*/
 void writeFromFile(string nazwa) {
 
     ifstream plik;

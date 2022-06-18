@@ -8,8 +8,8 @@
 #include <ctime>
 #include <string>
 
-
 using namespace std;
+
 //biblioteki swoje
 #include "globals.h"
 #include "functions_system.h"

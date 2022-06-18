@@ -1,22 +1,22 @@
-sterowanie P1: WSAD; bomba - Spacja
-sterowanie p2 strzaˆki [NumpadPad]; bomba - 0 [NumpadPad]
+Do obsˆugi tej gry wystarcz¥ Ci tylko cztery palce!
 
-punkty:
-zniszczenie ˜cianki +100
-trafienie przeciwnika +500
-trafienie samego siebie -750
-gdy trafi cie przeciwnik -500
-trafienie siebie ORAZ przeciwnika +250
-gdy skonczy sie czas ka¾de pozostale ¾ycie zamieniane jest na 1000 punkt¢w
+Wygrywa gracz kt¢ry uzyska najwi©cej punkt¢w. 
+Gra koäczy si© gdy kt¢ry˜ z graczy straci wszystkie ¾ycia lub gdy skoäczy si© czas.
+
+Czas gry: 2 minuty
+Czas gry w trybie Tesowania Map: nieograniczony
+
+poruszanie si©:
+Gracz 1: W,S,A,D; postawienie bomby - Spacja
+Gracz 2: 8,2,4,6; postawienie bomby - 0 [numery na NumpadPad'zie]
+
+zdobywanie punkt¢w:
+- zniszczenie ˜cianki +100
+- trafienie przeciwnika +500
+- trafienie samego siebie -750
+- gdy trafi cie przeciwnik -500
+- trafienie siebie ORAZ przeciwnika +250
+gdy skoäczy sie czas ka¾de pozostaˆe ¾ycie zamieniane jest na 1000 punkt¢w
 
 Û - niezniszczalne ˜ciany
 ° - zniszczalne ˜ciany
-
-gra konczy sie gdy ktorys gracz straci wszystkei zycia lub wraz z uplywam czasu 
-na koniec gry podsumowywane sa wszystkie punkty i wygrywa gracz ktry uzyskal ich najwiecej 
-(no chyba ze robimy ze ten kto straci wszytskie zycia to ma insta loose nie zaleznie od ilosci punktow?)
-
-czas na gre 2min
-czas na gre w trybie tesowania map: nieograniczony
-
-//spokojnie to jeszcza tu zmienie xP
