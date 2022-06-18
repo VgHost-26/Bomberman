@@ -23,6 +23,7 @@ int main() {
     setConsoleSize();
     hideCursor();
     setColors();
+    hideScrollbars();
 
     //pobieranie wielko�ci konsoli (centrowanie)
     CONSOLE_SCREEN_BUFFER_INFO csbi;    
