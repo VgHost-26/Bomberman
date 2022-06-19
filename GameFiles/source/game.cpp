@@ -27,6 +27,7 @@ int main() {
     
     setConsoleSize();
     hideCursor();
+    hideScrollbars();
     setColors();
     
     GameMap map1{};
@@ -213,12 +214,12 @@ int main() {
     coutWithBorder(" to return to menu", sizeX * 2, sizeY +2, false);
     //coutWithBorder("to go back to menu", sizeX * 2, sizeY + 2);
 
-   _getch();
-   
+    //_getch();
+    Sleep(1500);
+    pauza();
     
 
-
-   // system("pause");
+    // system("pause");
 
     delete [] bombs_1;
     delete [] bombs_2;
