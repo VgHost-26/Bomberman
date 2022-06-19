@@ -25,7 +25,7 @@ int main(){
 
     cout<<"\n";
     changeColor(_LightGrey);
-    setCenter(12); cout<<"Instruckja gry\n\n\n";
+    setCenter(12); cout<<"Instrukcja gry\n\n\n";
 
     changeColor(_DefGrey);
     writeFromFile("howtoplay.txt");
