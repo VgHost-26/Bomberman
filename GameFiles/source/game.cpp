@@ -44,7 +44,7 @@ int main() {
 
 
     //Tworzenie tablicy wrogow
-    Enemy *enemies = new Enemy[_EnemiesCount];
+   // Enemy *enemies = new Enemy[_EnemiesCount];
     
     int FakeTimer_1=1;
     int FakeTimer_2=1;
@@ -98,7 +98,7 @@ int main() {
     //---------GRA------------//
     int key{};
     while(p1.isAlive() && p2.isAlive() && !scoreboard.isTimeOver()){
-
+        cout.flush();
         key = getKey();    
         if(p1.control(_W, _A, _S, _D, _SPACE_BAR, key) == 6){
             for(int i = 0; i < _bombsSize; i++){
@@ -223,7 +223,7 @@ int main() {
 
     delete [] bombs_1;
     delete [] bombs_2;
-    delete [] enemies;
+   // delete [] enemies;
 
     system("start menu.exe");   //powrot do menu
     return 0;

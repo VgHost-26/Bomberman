@@ -96,7 +96,7 @@ int main(){
             if(selected==0){  //graj
 
                 for (int i=15; i<winHeight-5; i++) clearLine(winWidth/3, i, 40);
-
+                //ANCHOR Wybor mapy
                 //================================================================================================= WYBOR MAPY               
                 while (mapsMenu) {
                     modeMenu=true;
@@ -130,6 +130,7 @@ int main(){
                             game_session_config<<(selected+1)<<endl; 
                             selected=0;
                             game_session_config.close();
+                            //ANCHOR wybor trybu gry
                             //============================================================================TRYB GRY
 
                             for (int i=15; i<winHeight-5; i++) clearLine(winWidth/3, i, 40);
@@ -159,6 +160,7 @@ int main(){
                                         selected=0;
                                     } else {
                                         if (selected==0) {
+                                            //ANCHOR wybor nazwy PVP
                                             //==============================================================NICKNAME PvP
                                             for (int i=15; i<winHeight-5; i++) clearLine(winWidth/3, i, 40);
                                             game_session_config.open("game_session_config.txt", ios::app);
@@ -303,6 +305,7 @@ int main(){
                                             return 0;
 
                                         } else if (selected==1) {
+                                            //ANCHOR wybor nazwy solo
                                             //==============================================================NICKNAME TEST MAPY
                                             for (int i=15; i<winHeight-5; i++) clearLine(winWidth/3, i, 40);
                                             game_session_config.open("game_session_config.txt", ios::app);
@@ -380,7 +383,7 @@ int main(){
                                             setCursorPosition(middleCalc(winWidth, -5), 17);
                                             cout<<" ===  >";
 
-                                            selected=7;
+                                            selected=5;
                                             while(1){         // wybieranie koloru
                                                 key_num=getKey();
                                                 if(key_num==75){              //Strza�ka w lewo
