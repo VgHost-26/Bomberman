@@ -17,7 +17,6 @@ using namespace std;
 //klasya
 #include "GameMap.h"
 #include "Being.h"
-#include "Enemy.h"
 #include "Player.h"
 #include "Bomb.h"
 #include "Scoreboard.h"

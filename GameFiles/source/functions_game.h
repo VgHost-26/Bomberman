@@ -1,7 +1,8 @@
 //funkcje wykorzystywane tylko do pliku game.cpp
 #pragma once
 
-void cls(int x, int y){		//wyczyszcza jeden wybrany pixel na mapie 
+//wyczyszcza jeden wybrany pixel na mapie 
+void cls(int x, int y){		
 		setCursorPosition(x * 4,y * 2);
 		cout<<" "<<" ";
 		cout<<" "<<" ";
@@ -10,6 +11,7 @@ void cls(int x, int y){		//wyczyszcza jeden wybrany pixel na mapie
 		cout<<" "<<" ";
 }
 
+//int na stringa
 string int2string(int x){
 	string str{}, strTmp{};
 	while(x > 0){
@@ -20,6 +22,7 @@ string int2string(int x){
 	return str;
 }
 
+//konwertuje sekundy na format mm:ss
 string secToTime(int t){
 	string min="00", sec="00";
 	int Imin{}, Isec{};
@@ -50,6 +53,7 @@ string secToTime(int t){
 	return min + ":" + sec;
 }
 
+//wyswietla tekst w ramce, ostatni parametr obcina g¢rn¥ graw©dz gdy FALSE
 void coutWithBorder(string str, int x, int y, bool full = true){
 	
 	if(full){

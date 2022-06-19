@@ -79,130 +79,140 @@ public:
 
 
 };
-	void Player::show(){	//wy˜wietla gracza na mapie na jego aktualnej pozycji
-		if(Map->map[X][Y] < 30 || Map->map[X][Y] > 39){
-			if(hitted == true && *time % 2 == 0){
-			SetConsoleTextAttribute(hConsole, _Red);
 
-			}else if(hitted == true && *time % 2 == 1){
-				SetConsoleTextAttribute(hConsole, 0);
+//wy˜wietla gracza na mapie na jego aktualnej pozycji
+void Player::show(){	
+	if(Map->map[X][Y] < 30 || Map->map[X][Y] > 39){
+		if(hitted == true && *time % 2 == 0){
+		SetConsoleTextAttribute(hConsole, _Red);
 
-			}else{
-				SetConsoleTextAttribute(hConsole, color);
+		}else if(hitted == true && *time % 2 == 1){
+			SetConsoleTextAttribute(hConsole, 0);
 
-			}
-			setCursorPosition(X * 4,Y*2);
-			cout<<"}(";
-			cout<<"){";
-			setCursorPosition(X * 4,Y*2 + 1);
-			cout<<char(92)<<"'";
-			cout<<"'/";
-			SetConsoleTextAttribute(hConsole, defCol);
-		} 
-		
-
-	}
-
-	bool Player::moveX(int dir) {	//ruch w prawo (dir = +1) lub w lewo (dir = -1)
-
-		if(Map->map[X + dir][Y] != 0 || (X + dir >= (sizeX - 1) || X + dir <= 0)){
-			return false;
 		}else{
-			if(Map -> map[X][Y] >= 30 && Map -> map[X][Y] <= 39){		// czy stoi na bombie
-				X += dir;
-				Map -> map[X][Y] = 101;
-				show();
-			}else{
-				if(Map -> map[X][Y] == 101 || Map -> map[X][Y] == 0) cls(X,Y);
-				Map -> map[X][Y] = 0;
-				X += dir;
-				Map -> map[X][Y] = 101;
-				show();
-				return true;
-			}
-			
-			
-			
+			SetConsoleTextAttribute(hConsole, color);
+
+		}
+		setCursorPosition(X * 4,Y*2);
+		cout<<"}(";
+		cout<<"){";
+		setCursorPosition(X * 4,Y*2 + 1);
+		cout<<char(92)<<"'";
+		cout<<"'/";
+		SetConsoleTextAttribute(hConsole, defCol);
+	} 
+	
+
+}
+
+//ruch w prawo (dir = +1) lub w lewo (dir = -1)
+bool Player::moveX(int dir) {	
+
+	if(Map->map[X + dir][Y] != 0 || (X + dir >= (sizeX - 1) || X + dir <= 0)){
+		return false;
+	}else{
+		if(Map -> map[X][Y] >= 30 && Map -> map[X][Y] <= 39){		// czy stoi na bombie
+			X += dir;
+			Map -> map[X][Y] = 101;
+			show();
+		}else{
+			if(Map -> map[X][Y] == 101 || Map -> map[X][Y] == 0) cls(X,Y);
+			Map -> map[X][Y] = 0;
+			X += dir;
+			Map -> map[X][Y] = 101;
+			show();
 			return true;
 		}
+		
+		
+		
+		return true;
+	}
+
+
+	return false;
+}
+
+//ruch g¢ra (dir = -1) lub d¢ˆ (dir = +1)
+bool Player::moveY(int dir) {	
+
+	if(Map->map[X][Y + dir] != 0 || (Y + dir >= (sizeY - 1) || Y + dir <= 0)){
+		return false;
+	}else{
+		if(Map -> map[X][Y] >= 30 && Map -> map[X][Y] <= 39){
+			Y += dir;
+			Map -> map[X][Y] = 101;
+			show();
+		
+		}else{
+			if(Map -> map[X][Y] == 101 || Map -> map[X][Y] == 0) cls(X,Y);
+			Map -> map[X][Y] = 0;
+			Y += dir;
+			Map -> map[X][Y] = 101;
+			show();
+			return true;
+		}
+	}
+	return false;
+}
+
+// funkcja do poruszania si© //skˆadowe: klawisz w g¢re, lewo, d¢ˆ, prawo, funkcja do pobierania klawiszy	
+int Player::control(int w, int a, int s, int d, int bombKey, int key){		
 	
 
-		return false;
+	if(key == w){
+		return moveY(-1);
+
+	}else if(key == a){ //lewo
+		return moveX(-1);
+
+	}else if(key == s){ //d¢ˆ
+		return moveY(1);
+
+	}else if(key == d){ //prawo
+		return moveX(1);
+
+	}else if(key == bombKey){
+		return 6;
+		//return plantBomb(10);
+	}else{
+		return 0;
 	}
-	bool Player::moveY(int dir) {	//ruch g¢ra (dir = -1) lub d¢ˆ (dir = +1)
+	
+	return 0;
+}
 
-		if(Map->map[X][Y + dir] != 0 || (Y + dir >= (sizeY - 1) || Y + dir <= 0)){
-			return false;
-		}else{
-			if(Map -> map[X][Y] >= 30 && Map -> map[X][Y] <= 39){
-				Y += dir;
-				Map -> map[X][Y] = 101;
-				show();
-			
-			}else{
-				if(Map -> map[X][Y] == 101 || Map -> map[X][Y] == 0) cls(X,Y);
-				Map -> map[X][Y] = 0;
-				Y += dir;
-				Map -> map[X][Y] = 101;
-				show();
-				return true;
-			}
-		}
-		return false;
-	}
-	int Player::control(int w, int a, int s, int d, int bombKey, int key){		// funkcja do poruszania si© //skˆadowe: klawisz w g¢re, lewo, d¢ˆ, prawo, funkcja do pobierania klawiszy
-		
-		
+bool Player::plantBomb(int type){	//kˆadzie bombe w aktualnym miejscu gdzie si© znajduje
+	
+	
 
-		if(key == w){
-			return moveY(-1);
-
-		}else if(key == a){ //lewo
-			return moveX(-1);
-
-		}else if(key == s){ //d¢ˆ
-			return moveY(1);
-
-		}else if(key == d){ //prawo
-			return moveX(1);
-
-		}else if(key == bombKey){
-			return 6;
-			//return plantBomb(10);
-		}else{
-			return 0;
-		}
-		
-    	return 0;
-	}
-
-	bool Player::plantBomb(int type){	//kˆadzie bombe w aktualnym miejscu gdzie si© znajduje
-		
-		
-
-		// for(int i = 0; i < _bombsSize; i++){
-		// 	if(!bombs[i].isExist()){
-		// 		bombs[i].placeBomb(X,Y,30);	//30 - typ bomby
-		// 		break;
-		// 	} 
-		// }
-
-		
-		return false;
-	}
+	// for(int i = 0; i < _bombsSize; i++){
+	// 	if(!bombs[i].isExist()){
+	// 		bombs[i].placeBomb(X,Y,30);	//30 - typ bomby
+	// 		break;
+	// 	} 
+	// }
 
 	
-	int Player::minus1life(){
-		lifes--;
-		score -= _PlayerKillScoreAmount;
-		return lifes;
-	}
-	bool Player::isAlive(){
-		if(lifes > 0) return true;
+	return false;
+}
 
-		return false;
-	}
-	void Player::addScore(int amount){
-		score += amount;
-	}
+//odejmuje 1 zycie
+int Player::minus1life(){
+	lifes--;
+	score -= _PlayerKillScoreAmount;
+	return lifes;
+}
+
+//sprawdza czy gracz zyje
+bool Player::isAlive(){
+	if(lifes > 0) return true;
+
+	return false;
+}
+
+//dodaje punkty
+void Player::addScore(int amount){
+	score += amount;
+}
 

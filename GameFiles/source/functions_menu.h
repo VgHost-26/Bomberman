@@ -1,7 +1,8 @@
 //funkcje wykorzystywane w pliku menu.cpp
 #pragma once
 
-void printLogo(int color, int place){   //wyswietlanie logo na środku ekranu   
+//wyswietlanie logo na środku ekranu
+void printLogo(int color, int place){      
     
     fstream plik;
     string line{};
@@ -18,7 +19,8 @@ void printLogo(int color, int place){   //wyswietlanie logo na środku ekranu
     plik.close();  
 }
 
-void printBomob(){   //wyswietlanie kolorowej bomby w logo
+ //wyswietlanie kolorowej bomby w logo
+void printBomob(){  
     
     fstream plik;
     string line{};
@@ -37,7 +39,8 @@ void printBomob(){   //wyswietlanie kolorowej bomby w logo
     plik.close();  
 }
 
-void printIntro(double winWidth, double winHeight, int time, int step){   //wyswietlanie animacji intra   
+ //wyswietlanie animacji intra   
+void printIntro(double winWidth, double winHeight, int time, int step){  
     
     fstream plik;
     string line{};
@@ -106,12 +109,14 @@ void printIntro(double winWidth, double winHeight, int time, int step){   //wysw
     plik.close();
 }
 
-int middleCalc(int winWidth, int objWidth){     //obliczanie miejsca na środku ekranu dla konkretnego elementu wzgledem szerokości ekranu
+//obliczanie miejsca na środku ekranu dla konkretnego elementu wzgledem szerokości ekranu
+int middleCalc(int winWidth, int objWidth){     
     return winWidth-((winWidth-objWidth)/2);
 }
 
-void select(string tab[], int dl, int kt, int baseColor, int selectedColor, int place, int offset=0){    //podswietlanie wybranego elementu menu
-
+//podswietlanie wybranego elementu menu
+void select(string tab[], int dl, int kt, int baseColor, int selectedColor, int place, int offset=0){    
+    
     for(int i=0;i<dl;i++){
         
         if(i==kt){
@@ -124,6 +129,7 @@ void select(string tab[], int dl, int kt, int baseColor, int selectedColor, int 
     }
 }
 
+//wyswietla dostepne przyciski w prawym dolnym rogu
 void helpButtons(int x, int y)
 {
     SetConsoleTextAttribute(hConsole, _LightGrey);
@@ -132,13 +138,14 @@ void helpButtons(int x, int y)
     //cout<<"▲ góra | ▼ dół | <┘ zatwierdź";
 }
 
-void clearLine(int x, int y, int width){    //czy�ci wybran� linie
+//czysci wybrana linie tekstu
+void clearLine(int x, int y, int width){   
     setCursorPosition(x,y);
     for(int i=0;i<width;i++) cout<<" ";
 
 }
-
-bool confirm(int x, int y, int dCol, int sCol, bool border=0, string msg=""){ //wypisanei na ekranie funkcjonalnego tak/nie z mo�liwoscia wyboru
+//wypisanei na ekranie funkcjonalnego tak/nie z mo�liwoscia wyboru
+bool confirm(int x, int y, int dCol, int sCol, bool border=0, string msg=""){ 
             // pozycja,     kolor,   kolor wybranego el, czy ramka, wiadomosc
     if(border){
         //rysowanie ramki jesli tak wybrano
@@ -188,7 +195,8 @@ bool confirm(int x, int y, int dCol, int sCol, bool border=0, string msg=""){ //
     return 0;
 }
 
-void generateTable(string style[], int size, int place){    //tworzy tabelke na bazie przekazanego stylu
+//tworzy tabelke na bazie przekazanego stylu
+void generateTable(string style[], int size, int place){    
     cout.width(place);
     cout<<style[0]<<endl;
     for(int i=0;i<size;i++){
@@ -203,7 +211,8 @@ void generateTable(string style[], int size, int place){    //tworzy tabelke na 
     cout<<style[3]<<endl;
 }
 
-bool includeChar(string st, char z){    //sprawdza czy "string st" zawiera znak "char z"
+ //sprawdza czy "string st" zawiera znak "char z"
+bool includeChar(string st, char z){   
 
     for(int i=0;i<st.length();i++){
         if(st[i]==z){

@@ -39,7 +39,6 @@ const int _DefGrey  = 1;
 const int _LightGrey= 2;
 const int _DarkGrey = 3;
 const int _DarkGreen= 5;
-//const int _Test     = 7; //kolor na potrzeby poprawnego wyświetlania kolorów w kreatorze postaci
 const int _Pink     = 8;
 const int _Blue     = 9;
 const int _Green    = 10;

@@ -5,19 +5,20 @@
 #pragma comment(lib, "winmm.lib")
 #pragma warning(disable:4996)
 
-void setCursorPosition(int x, int y) {    //ustawinie pozycji kursora w konsoli
+//ustawinie pozycji kursora w konsoli
+void setCursorPosition(int x, int y) {    
 	HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE); //<mamy to juz w globalsach, Martin fixnij prosze kod
 	cout.flush();
 	COORD coord = { (SHORT)x, (SHORT)y };
 	SetConsoleCursorPosition(hOut, coord);
 }
-
-void changeColor(int color){	//zmiana aktualnie wyswietlanego koloru
+//zmiana aktualnie wyswietlanego koloru
+void changeColor(int color){	
 	SetConsoleTextAttribute(hConsole, color);
     
 }
-
-void setColors() {      //ustawienie domyslnej palety kolor�w dla ca�ej gry    
+//ustawienie domyslnej palety kolor�w dla ca�ej gry
+void setColors() {          
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_SCREEN_BUFFER_INFOEX info;
 	info.cbSize = sizeof(CONSOLE_SCREEN_BUFFER_INFOEX);
@@ -42,16 +43,16 @@ void setColors() {      //ustawienie domyslnej palety kolor�w dla ca�ej gry
 	SetConsoleScreenBufferInfoEx(hConsole, &info);
 
 }
-
-void hideCursor() {		//ukrycie kursora
+//ukrycie kursora
+void hideCursor() {		
 	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO info;
 	info.dwSize = 100;
 	info.bVisible = FALSE;
 	SetConsoleCursorInfo(consoleHandle, &info);
 }
-
-void showCursor() {		//poka� kursor
+//poka� kursor
+void showCursor() {		
 	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO info;
 	info.dwSize = 100;
@@ -68,8 +69,8 @@ int getWinCols(){
     columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;
     return columns;
 }
-
-void setConsoleSize() {      //ustawienie konsoli na pe�ny ekran oraz dopasowanie czcionki do ro�dzielczo�ci monitora
+//ustawienie konsoli na pe�ny ekran oraz dopasowanie czcionki do ro�dzielczo�ci monitora
+void setConsoleSize() {      
 
 	int W = GetSystemMetrics(SM_CXSCREEN); //pobranie szerokosci ekranu
 	int H = GetSystemMetrics(SM_CYSCREEN); //pobranie wysokosci ekranu
@@ -103,7 +104,8 @@ void setConsoleSize() {      //ustawienie konsoli na pe�ny ekran oraz dopasowa
 	SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &cfi);  //zatwierdzenie zmian
 }
 
-int getKey() {		//pobranie klawisza z klawiatury
+//pobranie klawisza z klawiatury
+int getKey() {		
 	if (_kbhit()) {
 		return _getch();
 	}
